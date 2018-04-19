@@ -1,0 +1,15 @@
+import Firebase from 'firebase'
+
+var config = {
+  apiKey: "AIzaSyATUsYlp5G8zAMv1mZ-H7q3ATo2yH9Hp7I",
+  authDomain: "fixmycampus-78290.firebaseapp.com",
+  databaseURL: "https://fixmycampus-78290.firebaseio.com",
+  projectId: "fixmycampus-78290",
+  storageBucket: "fixmycampus-78290.appspot.com",
+  messagingSenderId: "464047240260"
+};
+
+var fb = Firebase.initializeApp(config);
+
+export const db = fb.database();
+export const storageRef = fb.storage().ref();

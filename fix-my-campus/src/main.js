@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
+import VueFire from 'vuefire'
 import 'vuetify/dist/vuetify.min.css'
+import 'firebaseui/dist/firebaseui.css'
 
 Vue.use(VueFire);
 
@@ -16,9 +18,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  firebase:{
-
-  },
   components: { App },
   template: '<App/>'
 })

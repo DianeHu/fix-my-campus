@@ -1,56 +1,140 @@
 <template>
-  <v-parallax src="https://vuetifyjs.com/static/doc-images/parallax/material.jpg" height="700">
-    <v-layout column align-center justify-center>
-      <v-form>
+  <!--<v-parallax src="http://snworksceo.imgix.net/dtc/827432c9-f464-4b21-b190-11fbffb7c5d1.sized-1000x1000.jpg" height="700">
+    <v-layout column align-center justify-center>-->
+      <v-toolbar>
+        <v-toolbar-title v-if="user">{{user.name}}</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <!--<v-avatar>
+            <img :src="avatar" alt="Avatar">
+          </v-avatar>-->
+          <v-btn flat @click="signOut" v-if="user">
+            <a>
+              <span class="glyphicon glyphicon-log-out">Logout</span>
+            </a>
+          </v-btn>
+          <v-btn flat @click="signInPopup" v-else>
+            <a>
+              <span class="glyphicon glyphicon-user">Sign In</span>
+            </a>
+          </v-btn>
+          <div id="firebaseui-auth-container" :class="{ popup: isShown }"></div>
+        </v-toolbar-items>
+      </v-toolbar>
+      <!--<v-form>
         <v-text-field label="Email" v-model="newEmail" required></v-text-field>
         <v-text-field label="Password" v-model="newPassword" required></v-text-field>
         <v-card-actions>
           <v-btn>Login</v-btn>
           <v-btn>Sign Up</v-btn>
         </v-card-actions>
-      </v-form>
-    </v-layout>
-  </v-parallax>
+      </v-form>-->
+    <!--</v-layout>
+  </v-parallax>-->
 </template>
 
 <script>
+  import Firebase from 'firebase'
+  import FirebaseUI from 'firebaseui'
+  // single instance of popup credentials UI
+  var authUI = new FirebaseUI.auth.AuthUI(Firebase.auth())
 
   export default {
     name: "login",
 
     data(){
       return{
-        newEmail: '',
-        newPassword: ''
+        /*newEmail: '',
+        newPassword: ''*/
+        isShown: false
+      }
+    },
+
+    props: [
+      'getUser',
+      'setUser'
+    ],
+
+    computed:{
+      user(){
+        return this.getUser()
       }
     },
 
     methods:{
-      checkDukeStudent(){
-        this.newEmail = this.newEmail.trim();
-        if(this.newEmail){
-          var netID = "";
-          for(var i = 0; i < this.newEmail.length; i++){
-            if(this.newEmail[i] == "@"){
-              break;
+      signInPopup () {
+        authUI.start('#firebaseui-auth-container', {
+          // open the authentication flow as a popup
+          signInFlow: 'popup',
+          // require password each time
+          credentialHelper: FirebaseUI.auth.CredentialHelper.NONE,
+          // new users automatically created for new emails
+          signInOptions: [{
+            provider: Firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            requireDisplayName: true
+          }],
+          // respond to authenticaion attempts
+          callbacks: {
+            signInSuccessWithAuthResult: authResult => {
+              // save interesting parts of user data
+              this.signIn(authResult.user)
+              // hide styling again
+              this.isShown = false
+              // do not redirect
+              return false
+            },
+            uiShown: () => {
+              // style UI container as a popup
+              this.isShown = true
             }
-            netID += this.newEmail[i];
           }
-
-          var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
-
-          //running into same error as on Piazza
-          fetch(url).then(response => response.json())
-            .then(data => {
-              var tester = data.items[0];
-              if(tester != null){
-                return true;
-              }
-            })
-            .catch(error => console.log(error))
-        }
-        return false;
+        })
+      },
+      signIn (user) {
+        this.setUser({
+          name: user.displayName,
+          email: user.email,
+          uid: user.uid,
+          isAnonymous: user.isAnonymous
+        })
+      },
+      signOut () {
+        Firebase.auth().signOut()
+        this.setUser(null)
       }
+    },
+    mounted () {
+      // allow user to automatically log in if returning to site after refresh
+      Firebase.auth().onAuthStateChanged(authState => {
+        if (authState) {
+          this.signIn(authState)
+        }
+      })
+    },
+    checkDukeStudent(){
+      this.newEmail = this.newEmail.trim();
+      if(this.newEmail){
+        var netID = "";
+        for(var i = 0; i < this.newEmail.length; i++){
+          if(this.newEmail[i] == "@"){
+            break;
+          }
+          netID += this.newEmail[i];
+        }
+
+        var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
+
+        //running into same error as on Piazza
+        fetch(url).then(response => response.json())
+          .then(data => {
+            var tester = data.items[0];
+            if(tester != null){
+              return true;
+            }
+          })
+          .catch(error => console.log(error))
+      }
+      return false;
     }
   }
 
