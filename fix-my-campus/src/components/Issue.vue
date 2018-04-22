@@ -121,6 +121,7 @@
         if(file){
           this.image = file[0];
           this.imagePath = file.name;
+          console.log(file.name);
         }
         storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
         event.target.value = '';
