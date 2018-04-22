@@ -5,8 +5,9 @@
         <v-layout row>
           <v-flex xs7>
             <div>
+              <div>{{issue.owner}}</div>
               <div class="headline">
-                <v-btn v-if="issue.owner == currentUser" icon @click="setEditTrue('Title')">
+                <v-btn v-if="issue.owner == currentUser && !issue.editingTitle" icon @click="setEditTrue('Title')">
                   <v-icon>mode_edit</v-icon>
                 </v-btn>
                 <v-text-field v-if="issue.editingTitle"
@@ -18,16 +19,15 @@
                 ></v-text-field>
                 <span v-else>{{issue.title}}</span>
               </div>
-              <div>{{issue.owner}}</div>
               <div>
-                <v-btn icon v-if="issue.owner == currentUser" @click="setEditTrue('Description')">
+                <v-btn icon v-if="issue.owner == currentUser && !issue.editingDescription" @click="setEditTrue('Description')">
                   <v-icon>mode_edit</v-icon>
                 </v-btn>
                 <v-text-field v-if="issue.editingDescription"
                               @keyup.enter="editDescription()"
-                              name="editIssueTitle"
-                              label="Rename issue"
-                              v-model="renameTitle"
+                              name="editIssueDescription"
+                              label="Rename issue description"
+                              v-model="renameDescription"
                               style="display: inline-block;"
                 ></v-text-field>
                 <span v-else>{{issue.description}}</span>
@@ -42,13 +42,13 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
-        <v-btn icon v-if="issue.owner == currentUser">
+        <v-btn @click="closeIssue()" icon v-if="issue.owner == currentUser">
           <v-icon>close</v-icon>
         </v-btn>
         <v-btn v-if="issue.owner == currentUser" icon v-on:click.native="changeImage">
-          <v-icon>backup</v-icon>
+          <v-icon>add_a_photo</v-icon>
         </v-btn>
-        <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+        <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
       </v-container>
     </v-card>
   </v-flex>
@@ -105,7 +105,7 @@
       },
 
       changeImage(){
-        this.$refs.file.click();
+        this.$refs.fileNew.click();
       },
 
       addImage(event){
