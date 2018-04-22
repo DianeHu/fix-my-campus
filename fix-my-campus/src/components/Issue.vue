@@ -86,8 +86,12 @@
               {{comment.owner}} ({{comment.date}})
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <span>{{getNumLikes(comment)}}</span>
+            <v-btn flat icon color="red darken-2">
+              <v-icon small>thumb_up</v-icon>
+            </v-btn>
             <v-btn v-if="currentUser == comment.owner" @click="removeComment(comment)" icon>
-              <v-icon>close</v-icon>
+              <v-icon>delete</v-icon>
             </v-btn>
           </v-toolbar>
           <v-card-text>
@@ -134,6 +138,14 @@
 
       hideCurrComments(){
         this.issue.showComments = false;
+      },
+
+      getNumLikes(comm){
+        /*var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
+        this.$bindAsArray('likesArray', likes);
+        return this.likesArray.length;*/
+        //infinite render loop
+        return 0;
       },
 
       addComment(){
