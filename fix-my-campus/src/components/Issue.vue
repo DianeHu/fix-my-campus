@@ -104,7 +104,7 @@
 </template>
 
 <script>
-  import { storageRef } from '../database';
+  import {storageRef} from '../database';
   import {issueRef} from '../database';
   import {commentRef} from '../database';
 
@@ -141,10 +141,11 @@
       },
 
       getNumLikes(comm){
-        /*var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
+        var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
         this.$bindAsArray('likesArray', likes);
-        return this.likesArray.length;*/
+       /* return this.likesArray.length;*/
         //infinite render loop
+
         return 0;
       },
 
@@ -212,7 +213,7 @@
         var file = event.target.files;
         if(file){
           this.image = file[0];
-          this.imagePath = file.name;
+          this.imagePath = this.image.name;
           console.log(file.name);
         }
         storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
