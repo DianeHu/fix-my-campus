@@ -1,36 +1,21 @@
 <template>
-  <!--<v-parallax src="http://snworksceo.imgix.net/dtc/827432c9-f464-4b21-b190-11fbffb7c5d1.sized-1000x1000.jpg" height="700">
-    <v-layout column align-center justify-center>-->
-      <v-toolbar>
-        <v-toolbar-title v-if="user">{{user.name}}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <!--<v-avatar>
-            <img :src="avatar" alt="Avatar">
-          </v-avatar>-->
-          <v-btn flat @click="signOut" v-if="user">
-            <a>
-              <span class="glyphicon glyphicon-log-out">Logout</span>
-            </a>
-          </v-btn>
-          <v-btn flat @click="signInPopup" v-else>
-            <a>
-              <span class="glyphicon glyphicon-user">Sign In</span>
-            </a>
-          </v-btn>
-          <div id="firebaseui-auth-container" :class="{ popup: isShown }"></div>
-        </v-toolbar-items>
-      </v-toolbar>
-      <!--<v-form>
-        <v-text-field label="Email" v-model="newEmail" required></v-text-field>
-        <v-text-field label="Password" v-model="newPassword" required></v-text-field>
-        <v-card-actions>
-          <v-btn>Login</v-btn>
-          <v-btn>Sign Up</v-btn>
-        </v-card-actions>
-      </v-form>-->
-    <!--</v-layout>
-  </v-parallax>-->
+  <v-toolbar dark>
+    <v-toolbar-title v-if="user">{{user.name}}</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat @click="signOut" v-if="user">
+        <a>
+          <span class="glyphicon glyphicon-log-out">Logout</span>
+        </a>
+      </v-btn>
+      <v-btn flat @click="signInPopup" v-else>
+        <a>
+          <span class="glyphicon glyphicon-user">Sign In</span>
+        </a>
+      </v-btn>
+      <div id="firebaseui-auth-container" :class="{ popup: isShown }"></div>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
 
 <script>
@@ -46,6 +31,7 @@
       return{
         /*newEmail: '',
         newPassword: ''*/
+        newEmail: '',
         isShown: false
       }
     },
@@ -62,6 +48,39 @@
     },
 
     methods:{
+      checkDukeStudent(){
+        this.newEmail = this.newEmail.trim();
+        if(this.newEmail){
+          var netID = "";
+          for(var i = 0; i < this.newEmail.length; i++){
+            if(this.newEmail[i] == "@"){
+              break;
+            }
+            netID += this.newEmail[i];
+          }
+
+          var myInit = { method: 'GET',
+            headers: new Headers({
+              "Access-Control-Allow-Origin": "*"
+            }),
+            mode: 'no-cors',
+            cache: 'default' };
+
+          var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
+
+          var myRequest = new Request(url,myInit);
+          //running into same error as on Piazza
+          fetch(myRequest).then(response => response.json())
+            .then(data => {
+              var tester = data.items[0];
+              if(tester != null){
+                return true;
+              }
+            })
+            .catch(error => console.log(error))
+        }
+        return false;
+      },
       signInPopup () {
         authUI.start('#firebaseui-auth-container', {
           // open the authentication flow as a popup
@@ -110,31 +129,6 @@
           this.signIn(authState)
         }
       })
-    },
-    checkDukeStudent(){
-      this.newEmail = this.newEmail.trim();
-      if(this.newEmail){
-        var netID = "";
-        for(var i = 0; i < this.newEmail.length; i++){
-          if(this.newEmail[i] == "@"){
-            break;
-          }
-          netID += this.newEmail[i];
-        }
-
-        var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
-
-        //running into same error as on Piazza
-        fetch(url).then(response => response.json())
-          .then(data => {
-            var tester = data.items[0];
-            if(tester != null){
-              return true;
-            }
-          })
-          .catch(error => console.log(error))
-      }
-      return false;
     }
   }
 

@@ -13,3 +13,4 @@ var fb = Firebase.initializeApp(config);
 
 export const db = fb.database();
 export const storageRef = fb.storage().ref();
+export const issueRef = db.ref('issues');

@@ -1,0 +1,129 @@
+<template>
+  <v-flex xs12>
+    <v-card color="cyan darken-2" class="white--text">
+      <v-container fluid grid-list-lg>
+        <v-layout row>
+          <v-flex xs7>
+            <div>
+              <div class="headline">
+                <v-btn v-if="issue.owner == currentUser" icon @click="setEditTrue('Title')">
+                  <v-icon>mode_edit</v-icon>
+                </v-btn>
+                <v-text-field v-if="issue.editingTitle"
+                              @keyup.enter="editTitle()"
+                              name="editIssueTitle"
+                              label="Rename issue"
+                              v-model="renameTitle"
+                              style="display: inline-block;"
+                ></v-text-field>
+                <span v-else>{{issue.title}}</span>
+              </div>
+              <div>{{issue.owner}}</div>
+              <div>
+                <v-btn icon v-if="issue.owner == currentUser" @click="setEditTrue('Description')">
+                  <v-icon>mode_edit</v-icon>
+                </v-btn>
+                <v-text-field v-if="issue.editingDescription"
+                              @keyup.enter="editDescription()"
+                              name="editIssueTitle"
+                              label="Rename issue"
+                              v-model="renameTitle"
+                              style="display: inline-block;"
+                ></v-text-field>
+                <span v-else>{{issue.description}}</span>
+              </div>
+            </div>
+          </v-flex>
+          <v-flex xs5 v-if="issue.image">
+            <v-card-media
+              :src="issue.image"
+              height="125px"
+              contain
+            ></v-card-media>
+          </v-flex>
+        </v-layout>
+        <v-btn icon v-if="issue.owner == currentUser">
+          <v-icon>close</v-icon>
+        </v-btn>
+        <v-btn v-if="issue.owner == currentUser" icon v-on:click.native="changeImage">
+          <v-icon>backup</v-icon>
+        </v-btn>
+        <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+      </v-container>
+    </v-card>
+  </v-flex>
+</template>
+
+<script>
+  import { storageRef } from '../database';
+  import {issueRef} from '../database';
+
+  export default {
+    name: "issue",
+
+    data(){
+      return{
+        renameTitle: '',
+        renameDescription: ''
+      }
+    },
+
+    props:[
+      'issue',
+      'currentUser'
+    ],
+
+    firebase:{
+      issueReference: issueRef
+    },
+
+    methods:{
+      setEditTrue(val){
+        if(val == "Title"){
+          issueRef.child(this.issue['.key']).update({editingTitle: true});
+        } else if (val == "Description"){
+          issueRef.child(this.issue['.key']).update({editingDescription: true});
+        }
+      },
+
+      closeIssue(){
+        issueRef.child(this.issue['.key']).remove();
+      },
+
+      editTitle(){
+        this.renameTitle = this.renameTitle.trim();
+        if(this.renameTitle){
+          issueRef.child(this.issue['.key']).update({title: this.renameTitle, editingTitle: false});
+        }
+      },
+
+      editDescription(){
+        this.renameDescription = this.renameDescription.trim();
+        if(this.renameDescription){
+          issueRef.child(this.issue['.key']).update({description: this.renameDescription, editingDescription: false});
+        }
+      },
+
+      changeImage(){
+        this.$refs.file.click();
+      },
+
+      addImage(event){
+        var file = event.target.files;
+        if(file){
+          this.image = file[0];
+          this.imagePath = file.name;
+        }
+        storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
+      },
+
+      updateImage(arg){
+        issueRef.child(this.issue['.key']).update({image: arg});
+      },
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
