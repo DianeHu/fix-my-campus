@@ -1,27 +1,33 @@
 <template>
-  <v-flex xs12>
+  <v-flex xs12 sm6 md4>
     <v-card color="cyan darken-2" class="white--text">
+      <v-toolbar color="grey lighten-2" dense>
+        <v-toolbar-title>
+          <div class="headline">
+            <v-btn v-if="issue.owner == currentUser && !issue.editingTitle" icon @click="setEditTrue('Title')">
+              <v-icon small>mode_edit</v-icon>
+            </v-btn>
+            <v-text-field v-if="issue.editingTitle"
+                          @keyup.enter="editTitle()"
+                          name="editIssueTitle"
+                          label="Rename issue"
+                          v-model="renameTitle"
+                          style="display: inline-block;"
+            ></v-text-field>
+            <span v-else>{{issue.title}}</span>
+          </div>
+        </v-toolbar-title>
+        <v-spacer>
+        </v-spacer>
+        <span>{{issue.owner}}</span>
+      </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row>
           <v-flex xs7>
             <div>
-              <div>{{issue.owner}}</div>
-              <div class="headline">
-                <v-btn v-if="issue.owner == currentUser && !issue.editingTitle" icon @click="setEditTrue('Title')">
-                  <v-icon>mode_edit</v-icon>
-                </v-btn>
-                <v-text-field v-if="issue.editingTitle"
-                              @keyup.enter="editTitle()"
-                              name="editIssueTitle"
-                              label="Rename issue"
-                              v-model="renameTitle"
-                              style="display: inline-block;"
-                ></v-text-field>
-                <span v-else>{{issue.title}}</span>
-              </div>
               <div>
                 <v-btn icon v-if="issue.owner == currentUser && !issue.editingDescription" @click="setEditTrue('Description')">
-                  <v-icon>mode_edit</v-icon>
+                  <v-icon small>mode_edit</v-icon>
                 </v-btn>
                 <v-text-field v-if="issue.editingDescription"
                               @keyup.enter="editDescription()"
@@ -43,7 +49,7 @@
           </v-flex>
         </v-layout>
         <v-btn @click="closeIssue()" icon v-if="issue.owner == currentUser">
-          <v-icon>close</v-icon>
+          <v-icon>delete</v-icon>
         </v-btn>
         <v-btn v-if="issue.owner == currentUser" icon v-on:click.native="changeImage">
           <v-icon>add_a_photo</v-icon>
@@ -64,7 +70,9 @@
     data(){
       return{
         renameTitle: '',
-        renameDescription: ''
+        renameDescription: '',
+        image: null,
+        imagePath: ''
       }
     },
 
@@ -115,6 +123,7 @@
           this.imagePath = file.name;
         }
         storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
+        event.target.value = '';
       },
 
       updateImage(arg){

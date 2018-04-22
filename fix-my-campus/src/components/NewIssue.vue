@@ -1,11 +1,31 @@
 <template>
   <v-flex xs12>
-    <v-card dark>
+    <v-card>
+      <v-toolbar dark dense>
+        <v-toolbar-title>
+          <div class="headline">
+            <v-btn icon v-if="!editingTitle" @click="setEditTrue('Title')">
+              <v-icon small>mode_edit</v-icon>
+            </v-btn>
+            <v-text-field v-if="editingTitle"
+                          @keyup.enter="editTitle()"
+                          name="editIssueTitle"
+                          label="Title issue"
+                          v-model="renameTitle"
+                          style="display: inline-block;"
+            ></v-text-field>
+            <span v-else>{{renameTitle}}</span>
+          </div>
+        </v-toolbar-title>
+        <v-spacer>
+        </v-spacer>
+        <span>{{currentUser}}</span>
+      </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row>
           <v-flex xs7>
             <div>
-              <div>{{currentUser}}</div>
+              <!--<div>{{currentUser}}</div>
               <div class="headline">
                 <v-btn icon v-if="!editingTitle" @click="setEditTrue('Title')">
                   <v-icon>mode_edit</v-icon>
@@ -19,9 +39,9 @@
                 ></v-text-field>
                 <span v-else>{{renameTitle}}</span>
               </div>
-              <div>
+              <div>-->
                 <v-btn icon v-if="!editingDescription" @click="setEditTrue('Description')">
-                  <v-icon>mode_edit</v-icon>
+                  <v-icon small>mode_edit</v-icon>
                 </v-btn>
                 <v-text-field v-if="editingDescription"
                               @keyup.enter="editDescription()"
@@ -32,7 +52,6 @@
                 ></v-text-field>
                 <span v-else>{{renameDescription}}</span>
               </div>
-            </div>
           </v-flex>
           <v-flex xs5 v-if="image != null">
             <v-card-media
@@ -43,7 +62,7 @@
           </v-flex>
         </v-layout>
         <v-btn @click="closeIssue()" icon>
-          <v-icon>close</v-icon>
+          <v-icon>delete</v-icon>
         </v-btn>
         <v-btn icon v-on:click.native="changeImage">
           <v-icon>add_a_photo</v-icon>
@@ -128,6 +147,7 @@
           this.imagePath = file.name;
         }
         storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
+        event.target.value = '';
       },
 
       updateImage(arg){
