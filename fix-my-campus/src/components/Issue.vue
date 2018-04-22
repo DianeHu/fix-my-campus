@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12 sm6 md4>
     <v-card color="cyan darken-2" class="white--text">
-      <v-toolbar color="grey lighten-2" dense>
+      <v-toolbar dark dense>
         <v-toolbar-title>
           <div class="headline">
             <v-btn v-if="issue.owner == currentUser && !issue.editingTitle" icon @click="setEditTrue('Title')">
@@ -19,7 +19,9 @@
         </v-toolbar-title>
         <v-spacer>
         </v-spacer>
-        <span>{{issue.owner}}</span>
+        <span>{{issue.owner}}
+          <v-chip label outline>{{issue.date}}</v-chip>
+        </span>
       </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row>
@@ -48,14 +50,51 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
-        <v-btn @click="closeIssue()" icon v-if="issue.owner == currentUser">
-          <v-icon>delete</v-icon>
-        </v-btn>
-        <v-btn v-if="issue.owner == currentUser" icon v-on:click.native="changeImage">
-          <v-icon>add_a_photo</v-icon>
-        </v-btn>
-        <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+        <v-card-actions>
+          <v-btn @click="showCurrComments()" icon color="white" v-if="!issue.showComments">
+            <v-icon>expand_more</v-icon>
+          </v-btn>
+          <v-btn @click="hideCurrComments()" icon color="white" v-if="issue.showComments">
+            <v-icon>expand_less</v-icon>
+          </v-btn>
+          <v-btn @click="closeIssue()" icon v-if="issue.owner == currentUser">
+            <v-icon>delete</v-icon>
+          </v-btn>
+          <v-btn v-if="issue.owner == currentUser" icon v-on:click.native="changeImage">
+            <v-icon>add_a_photo</v-icon>
+          </v-btn>
+          <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+        </v-card-actions>
       </v-container>
+
+      <div v-if="issue.showComments">
+        <v-card>
+            <v-text-field textarea
+                          name="addingComment"
+                          label="Add a comment"
+                          v-model="newComment"
+                          style="display: inline-block"></v-text-field>
+          <v-card-text>
+            <v-card-actions>
+              <v-btn dark class="alignRight" @click="addComment()">Post</v-btn>
+            </v-card-actions>
+          </v-card-text>
+        </v-card>
+        <v-card v-for="comment in getComments()">
+          <v-toolbar color="grey lighten-2" dense>
+            <v-toolbar-title>
+              {{comment.owner}} ({{comment.date}})
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn v-if="currentUser == comment.owner" @click="removeComment(comment)" icon>
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-card-text>
+            {{comment.title}}
+          </v-card-text>
+        </v-card>
+      </div>
     </v-card>
   </v-flex>
 </template>
@@ -63,6 +102,7 @@
 <script>
   import { storageRef } from '../database';
   import {issueRef} from '../database';
+  import {commentRef} from '../database';
 
   export default {
     name: "issue",
@@ -72,7 +112,8 @@
         renameTitle: '',
         renameDescription: '',
         image: null,
-        imagePath: ''
+        imagePath: '',
+        newComment: ''
       }
     },
 
@@ -82,10 +123,49 @@
     ],
 
     firebase:{
-      issueReference: issueRef
+      issueReference: issueRef,
+      commentReference: commentRef
     },
 
     methods:{
+      showCurrComments(){
+        this.issue.showComments = true;
+      },
+
+      hideCurrComments(){
+        this.issue.showComments = false;
+      },
+
+      addComment(){
+        var today = new Date();
+        var d = today.getDate();
+        var m = today.getMonth() + 1;
+        var y = today.getFullYear();
+
+        if(d < 10) d = '0' + d;
+        if(m < 10) m = '0' + m;
+        today = m + '/' + d + '/' + y;
+
+        this.newComment = this.newComment.trim();
+        if(this.newComment){
+          commentRef.push({
+            title: this.newComment,
+            owner: this.currentUser,
+            id: this.issue['.key'],
+            date: today
+          })
+          this.newComment = '';
+        }
+      },
+
+      getComments(){
+        return this.commentReference.filter(comm => comm.id == this.issue['.key']);
+      },
+
+      removeComment(comm){
+        commentRef.child(comm['.key']).remove();
+      },
+
       setEditTrue(val){
         if(val == "Title"){
           issueRef.child(this.issue['.key']).update({editingTitle: true});
@@ -135,5 +215,9 @@
 </script>
 
 <style scoped>
-
+  .alignRight{
+    position: absolute;
+    right: 0px;
+    padding: 1px;
+  }
 </style>

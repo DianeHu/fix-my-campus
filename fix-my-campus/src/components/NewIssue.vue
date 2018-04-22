@@ -40,18 +40,18 @@
                 <span v-else>{{renameTitle}}</span>
               </div>
               <div>-->
-                <v-btn icon v-if="!editingDescription" @click="setEditTrue('Description')">
-                  <v-icon small>mode_edit</v-icon>
-                </v-btn>
-                <v-text-field v-if="editingDescription"
-                              @keyup.enter="editDescription()"
-                              name="editIssueDescription"
-                              label="Add issue description"
-                              v-model="renameDescription"
-                              style="display: inline-block;"
-                ></v-text-field>
-                <span v-else>{{renameDescription}}</span>
-              </div>
+              <v-btn icon v-if="!editingDescription" @click="setEditTrue('Description')">
+                <v-icon small>mode_edit</v-icon>
+              </v-btn>
+              <v-text-field v-if="editingDescription"
+                            @keyup.enter="editDescription()"
+                            name="editIssueDescription"
+                            label="Add issue description"
+                            v-model="renameDescription"
+                            style="display: inline-block;"
+              ></v-text-field>
+              <span v-else>{{renameDescription}}</span>
+            </div>
           </v-flex>
           <v-flex xs5 v-if="image != null">
             <v-card-media
@@ -61,14 +61,17 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
-        <v-btn @click="closeIssue()" icon>
-          <v-icon>delete</v-icon>
-        </v-btn>
-        <v-btn icon v-on:click.native="changeImage">
-          <v-icon>add_a_photo</v-icon>
-        </v-btn>
-        <v-btn @click="submit()" flat>Submit</v-btn>
-        <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+        <v-card-actions>
+          <v-btn @click="closeIssue()" icon>
+            <v-icon>delete</v-icon>
+          </v-btn>
+          <v-btn icon v-on:click.native="changeImage">
+            <v-icon>add_a_photo</v-icon>
+          </v-btn>
+          <v-btn @click="submit()" flat>Submit</v-btn>
+          <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+          <v-chip outline>Posted {{currDate}}</v-chip>
+        </v-card-actions>
       </v-container>
     </v-card>
   </v-flex>
@@ -87,7 +90,8 @@
         renameDescription: 'Description',
         editingTitle: false,
         editingDescription: false,
-        image: null
+        image: null,
+        date: ''
       }
     },
 
@@ -96,6 +100,21 @@
       'closeIssue',
       'showing'
     ],
+
+    computed:{
+      currDate(){
+        var today = new Date();
+        var d = today.getDate();
+        var m = today.getMonth() + 1;
+        var y = today.getFullYear();
+
+        if(d < 10) d = '0' + d;
+        if(m < 10) m = '0' + m;
+        this.date = m + '/' + d + '/' + y;
+        today = m + '/' + d + '/' + y;
+        return today;
+      },
+    },
 
     firebase:{
       issueReference: issueRef
@@ -110,7 +129,9 @@
             editingTitle: false,
             editingDescription: false,
             image: this.image,
-            owner: this.currentUser
+            owner: this.currentUser,
+            date: this.date,
+            showComments: false
           });
           this.closeIssue();
         } else{
