@@ -70,7 +70,7 @@
           </v-btn>
           <v-btn @click="submit()" flat>Submit</v-btn>
           <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
-          <v-chip outline>Posted {{currDate}}</v-chip>
+          <v-chip outline>{{currDate}}</v-chip>
         </v-card-actions>
       </v-container>
     </v-card>

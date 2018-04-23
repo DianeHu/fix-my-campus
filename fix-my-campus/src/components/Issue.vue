@@ -64,11 +64,12 @@
             <v-icon>add_a_photo</v-icon>
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+          <tagger :issueProp=issue></tagger>
         </v-card-actions>
       </v-container>
 
       <div v-if="issue.showComments">
-        <v-card>
+        <!--<v-card>
           <v-text-field textarea
                         name="addingComment"
                         label="Add a comment"
@@ -79,7 +80,7 @@
               <v-btn dark class="alignRight" @click="addComment()">Post</v-btn>
             </v-card-actions>
           </v-card-text>
-        </v-card>
+        </v-card>-->
         <v-card v-for="comment in getComments()">
           <v-toolbar color="grey lighten-2" dense>
             <v-toolbar-title>
@@ -101,6 +102,19 @@
             {{comment.title}}
           </v-card-text>
         </v-card>
+        <v-card>
+          <v-text-field textarea
+                        name="addingComment"
+                        label="Add a comment"
+                        v-model="newComment"
+                        style="display: inline-block"></v-text-field>
+          <v-card-text>
+            <v-card-actions>
+              <v-btn dark class="alignSemiRight" @click="cancelComment()">Cancel</v-btn>
+              <v-btn dark class="alignRight" @click="addComment()">Post</v-btn>
+            </v-card-actions>
+          </v-card-text>
+        </v-card>
       </div>
     </v-card>
   </v-flex>
@@ -110,6 +124,8 @@
   import {storageRef} from '../database';
   import {issueRef} from '../database';
   import {commentRef} from '../database';
+  import {tagRef} from '../database';
+  import tagger from './tagger';
 
   export default {
     name: "issue",
@@ -131,11 +147,16 @@
 
     firebase:{
       issueReference: issueRef,
-      commentReference: commentRef
+      commentReference: commentRef,
+      tagReference: tagRef
     },
 
     computed:{
 
+    },
+
+    components:{
+      tagger
     },
 
     methods:{
@@ -157,6 +178,7 @@
 
       getNumLikes(comm){
         var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
+        console.log(likes);
         this.$bindAsArray('likesArrayNum', likes);
         /* return this.likesArrayNum.length;*/
         //infinite render loop
@@ -196,6 +218,10 @@
           })
           this.newComment = '';
         }
+      },
+
+      cancelComment(){
+        this.newComment = '';
       },
 
       getComments(){
@@ -258,6 +284,12 @@
   .alignRight{
     position: absolute;
     right: 0px;
+    padding: 1px;
+  }
+
+  .alignSemiRight{
+    position: absolute;
+    right: 95px;
     padding: 1px;
   }
 </style>
