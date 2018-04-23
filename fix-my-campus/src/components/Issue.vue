@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm6 md4>
+  <v-flex xs12 sm12 md4>
     <v-card color="cyan darken-2" class="white--text">
       <v-toolbar dark dense>
         <v-toolbar-title>
@@ -69,11 +69,11 @@
 
       <div v-if="issue.showComments">
         <v-card>
-            <v-text-field textarea
-                          name="addingComment"
-                          label="Add a comment"
-                          v-model="newComment"
-                          style="display: inline-block"></v-text-field>
+          <v-text-field textarea
+                        name="addingComment"
+                        label="Add a comment"
+                        v-model="newComment"
+                        style="display: inline-block"></v-text-field>
           <v-card-text>
             <v-card-actions>
               <v-btn dark class="alignRight" @click="addComment()">Post</v-btn>
@@ -87,7 +87,10 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <span>{{getNumLikes(comment)}}</span>
-            <v-btn flat icon color="red darken-2">
+            <v-btn @click="unlike(comment)" flat icon color="red darken-2" v-if="likedByCurrUser(comment)">
+              <v-icon small>thumb_up</v-icon>
+            </v-btn>
+            <v-btn flat @click="like(comment)" icon v-if="!likedByCurrUser(comment)">
               <v-icon small>thumb_up</v-icon>
             </v-btn>
             <v-btn v-if="currentUser == comment.owner" @click="removeComment(comment)" icon>
@@ -131,7 +134,19 @@
       commentReference: commentRef
     },
 
+    computed:{
+
+    },
+
     methods:{
+      likedByCurrUser(comm){
+        /*var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
+        this.$bindAsArray('likesArray', likes);
+        var used = this.likesArray.filter(user => user.id == this.currentUser);
+        if(used.length == 0) return false;*/
+        return false;
+      },
+
       showCurrComments(){
         this.issue.showComments = true;
       },
@@ -142,11 +157,23 @@
 
       getNumLikes(comm){
         var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
-        this.$bindAsArray('likesArray', likes);
-       /* return this.likesArray.length;*/
+        this.$bindAsArray('likesArrayNum', likes);
+        /* return this.likesArrayNum.length;*/
         //infinite render loop
-
         return 0;
+      },
+
+      like(comm){
+        commentRef.child(comm['.key']).child('usersWhoLiked').push({
+          id: this.currentUser
+        });
+      },
+
+      unlike(comm){
+        var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
+        this.$bindAsArray('likesArrayDis', likes);
+        var filterForUser = this.likesArrayDis.filter(user => user.id == this.currentUser);
+        commentRef.child(comm['.key']).child('usersWhoLiked').child(filterForUser[0]['.key']).remove();
       },
 
       addComment(){
