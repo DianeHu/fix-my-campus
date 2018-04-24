@@ -102,6 +102,7 @@
             {{comment.title}}
           </v-card-text>
         </v-card>
+        <v-divider></v-divider>
         <v-card>
           <v-text-field textarea
                         name="addingComment"

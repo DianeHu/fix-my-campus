@@ -29,22 +29,10 @@
                         style="display: inline-block;"
           ></v-text-field>
           <v-container fluid>
-            <v-list-tile v-for="tag in tagReference">
-              <v-list-tile-action>
-                <v-checkbox v-model="checkbox"></v-checkbox>
-              </v-list-tile-action>
-              <v-list-tile-content>
-                <v-list-tile-title>{{tag.title}}</v-list-tile-title>
-              </v-list-tile-content>
-              <v-btn @click="log(tag)">nothing</v-btn>
-              <!--<v-list-tile-content>
-                <v-icon @click="removeCategory(category)">close</v-icon>
-              </v-list-tile-content>-->
-            </v-list-tile>
-           <!-- <v-checkbox v-for="singleTag in getTagRef"
+            <v-checkbox v-for="singleTag in tagReference"
                         v-model="checkbox"
                         v-bind:label=singleTag.title
-                        v-bind:value=singleTag.title></v-checkbox>-->
+                        v-bind:value=singleTag.title></v-checkbox>
           </v-container>
         </v-card-text>
         <v-divider></v-divider>
