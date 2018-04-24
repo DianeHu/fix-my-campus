@@ -125,6 +125,7 @@
   import {issueRef} from '../database';
   import {commentRef} from '../database';
   import {tagRef} from '../database';
+  import {likeRef} from '../database';
   import tagger from './tagger';
 
   export default {
@@ -148,7 +149,8 @@
     firebase:{
       issueReference: issueRef,
       commentReference: commentRef,
-      tagReference: tagRef
+      tagReference: tagRef,
+      likeReference: likeRef
     },
 
     computed:{
@@ -161,11 +163,9 @@
 
     methods:{
       likedByCurrUser(comm){
-        /*var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
-        this.$bindAsArray('likesArray', likes);
-        var used = this.likesArray.filter(user => user.id == this.currentUser);
-        if(used.length == 0) return false;*/
-        return false;
+        var likes = this.likeReference.filter(l => l.id == comm['.key'] && l.liker == this.currentUser);
+        if(likes.length == 0) return false;
+        return true;
       },
 
       showCurrComments(){
@@ -177,25 +177,20 @@
       },
 
       getNumLikes(comm){
-        var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
-        console.log(likes);
-        this.$bindAsArray('likesArrayNum', likes);
-        /* return this.likesArrayNum.length;*/
-        //infinite render loop
-        return 0;
+        var likes = this.likeReference.filter(l => l.id == comm['.key']);
+        return likes.length;
       },
 
       like(comm){
-        commentRef.child(comm['.key']).child('usersWhoLiked').push({
-          id: this.currentUser
-        });
+        likeRef.push({
+          id: comm['.key'],
+          liker: this.currentUser
+        })
       },
 
       unlike(comm){
-        var likes = commentRef.child(comm['.key']).child('usersWhoLiked');
-        this.$bindAsArray('likesArrayDis', likes);
-        var filterForUser = this.likesArrayDis.filter(user => user.id == this.currentUser);
-        commentRef.child(comm['.key']).child('usersWhoLiked').child(filterForUser[0]['.key']).remove();
+        var likes = this.likeReference.filter(l => l.id == comm['.key'] && l.liker == this.currentUser);
+        likeRef.child(likes[0]['.key']).remove();
       },
 
       addComment(){
@@ -229,6 +224,8 @@
       },
 
       removeComment(comm){
+        var toRemove = this.likeReference.filter(l => l.id == comm['.key']);
+        toRemove.forEach(r => likeRef.child(r['.key']).remove());
         commentRef.child(comm['.key']).remove();
       },
 
@@ -241,6 +238,8 @@
       },
 
       closeIssue(){
+        var toRemove = this.commentReference.filter(c => c.id == this.issue['.key']);
+        toRemove.forEach(comm => this.removeComment(comm));
         issueRef.child(this.issue['.key']).remove();
       },
 
@@ -267,7 +266,6 @@
         if(file){
           this.image = file[0];
           this.imagePath = this.image.name;
-          console.log(file.name);
         }
         storageRef.child('images/' + this.imagePath).put(this.image).then(snapshot => this.updateImage(snapshot.downloadURL));
         event.target.value = '';

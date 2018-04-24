@@ -29,7 +29,7 @@
                         style="display: inline-block;"
           ></v-text-field>
           <v-container fluid>
-            <v-list-tile v-for="tag in tagRef">
+            <v-list-tile v-for="tag in tagReference">
               <v-list-tile-action>
                 <v-checkbox v-model="checkbox"></v-checkbox>
               </v-list-tile-action>
