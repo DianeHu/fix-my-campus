@@ -69,7 +69,7 @@
             <v-icon>add_a_photo</v-icon>
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
-          <tagger :issueProp=issue></tagger>
+          <tagger :issueProp=issue :newIssue=false></tagger>
           <v-spacer></v-spacer>
           <span>{{getNumLikes(issue)}}</span>
           <v-btn @click="unlike(issue)" flat icon color="red darken-2" v-if="likedByCurrUser(issue)">

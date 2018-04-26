@@ -30,6 +30,7 @@
 
   import { storageRef } from './database';
   import {issueRef} from './database';
+  import {tagRef} from './database';
 
   import login from './components/login';
   import newissue from './components/newissue';
@@ -44,7 +45,8 @@
     },
 
     firebase:{
-      issueReference: issueRef
+      issueReference: issueRef,
+      tagReference: tagRef
     },
 
     components:{
@@ -56,11 +58,16 @@
     methods:{
       closeAddIssue(){
         this.addingIssue = false;
+        this.deleteAllTemps();
+      },
+
+      deleteAllTemps(){
+        var toRemove = this.tagReference.filter(t => t.owner == 'temp');
+        toRemove.forEach(r => tagRef.child(r['.key']).remove());
       },
 
       openAddIssue(){
         this.addingIssue = true;
-        console.log("turned to true");
       },
 
       getUser () {
