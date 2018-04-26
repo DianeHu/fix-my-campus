@@ -29,8 +29,6 @@
 
     data(){
       return{
-        /*newEmail: '',
-        newPassword: ''*/
         newEmail: '',
         isShown: false
       }
@@ -58,17 +56,24 @@
             }
             netID += this.newEmail[i];
           }
+          console.log(netID);
 
-          var myInit = { method: 'GET',
+          /*var myInit = { method: 'GET',
             headers: new Headers({
               "Access-Control-Allow-Origin": "*"
             }),
             mode: 'no-cors',
             cache: 'default' };
-
+*/
           var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
 
-          var myRequest = new Request(url,myInit);
+          const proxyURL = "https://cors-anywhere.herokuapp.com/";
+          fetch(proxyURL + url)
+            .then(response => response.json())
+            .then(contents => { console.log(contents) })
+            .catch(() => console.log("Access to " + url + " is still blocked."))
+
+          /*var myRequest = new Request(url,myInit);
           //running into same error as on Piazza
           fetch(myRequest).then(response => response.json())
             .then(data => {
@@ -78,8 +83,8 @@
               }
             })
             .catch(error => console.log(error))
+          return false;*/
         }
-        return false;
       },
       signInPopup () {
         authUI.start('#firebaseui-auth-container', {
