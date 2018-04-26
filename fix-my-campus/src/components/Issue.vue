@@ -50,6 +50,11 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
+        <v-divider></v-divider>
+        <v-chip label>
+          <v-icon left>label</v-icon>Tags
+        </v-chip>
+        <v-divider></v-divider>
         <v-card-actions>
           <v-btn @click="showCurrComments()" icon color="white" v-if="!issue.showComments">
             <v-icon>expand_more</v-icon>
@@ -64,6 +69,8 @@
             <v-icon>add_a_photo</v-icon>
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+          <tagger :issueProp=issue></tagger>
+          <v-spacer></v-spacer>
           <span>{{getNumLikes(issue)}}</span>
           <v-btn @click="unlike(issue)" flat icon color="red darken-2" v-if="likedByCurrUser(issue)">
             <v-icon small>thumb_up</v-icon>
@@ -71,23 +78,10 @@
           <v-btn flat @click="like(issue)" icon v-if="!likedByCurrUser(issue)">
             <v-icon small>thumb_up</v-icon>
           </v-btn>
-          <tagger :issueProp=issue></tagger>
         </v-card-actions>
       </v-container>
 
       <div v-if="issue.showComments">
-        <!--<v-card>
-          <v-text-field textarea
-                        name="addingComment"
-                        label="Add a comment"
-                        v-model="newComment"
-                        style="display: inline-block"></v-text-field>
-          <v-card-text>
-            <v-card-actions>
-              <v-btn dark class="alignRight" @click="addComment()">Post</v-btn>
-            </v-card-actions>
-          </v-card-text>
-        </v-card>-->
         <v-card v-for="comment in getComments()">
           <v-toolbar color="grey lighten-2" dense>
             <v-toolbar-title>
@@ -170,6 +164,10 @@
     },
 
     methods:{
+      getTagsForIssue(){
+        
+      },
+
       likedByCurrUser(comm){
         var likes = this.likeReference.filter(l => l.id == comm['.key'] && l.liker == this.currentUser);
         if(likes.length == 0) return false;
