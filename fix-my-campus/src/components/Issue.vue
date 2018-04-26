@@ -50,11 +50,11 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
-        <v-divider></v-divider>
-        <v-chip label>
-          <v-icon left>label</v-icon>Tags
+        <v-divider light></v-divider>
+        <v-chip outline color="black" v-for="tag in getTagsForIssue()">
+          {{tag}}
         </v-chip>
-        <v-divider></v-divider>
+        <v-divider light></v-divider>
         <v-card-actions>
           <v-btn @click="showCurrComments()" icon color="white" v-if="!issue.showComments">
             <v-icon>expand_more</v-icon>
@@ -124,6 +124,7 @@
 
 <script>
   import {storageRef} from '../database';
+  import {categoryRef} from '../database';
   import {issueRef} from '../database';
   import {commentRef} from '../database';
   import {tagRef} from '../database';
@@ -152,7 +153,8 @@
       issueReference: issueRef,
       commentReference: commentRef,
       tagReference: tagRef,
-      likeReference: likeRef
+      likeReference: likeRef,
+      categoryReference: categoryRef
     },
 
     computed:{
@@ -165,7 +167,15 @@
 
     methods:{
       getTagsForIssue(){
-        
+        var tagged = this.tagReference.filter(t => t.owner == this.issue['.key']);
+        var titles = [];
+        for(var i = 0; i < tagged.length; i++){
+          var cat = this.categoryReference.filter(c => c['.key'] == tagged[i].id);
+          if(cat.length != 0){
+            titles.push(cat[0].title);
+          }
+        }
+        return titles;
       },
 
       likedByCurrUser(comm){
