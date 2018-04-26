@@ -17,3 +17,4 @@ export const issueRef = db.ref('issues');
 export const commentRef = db.ref('comments');
 export const likeRef = db.ref('likes');
 export const tagRef = db.ref('tags');
+export const categoryRef = db.ref('categories');

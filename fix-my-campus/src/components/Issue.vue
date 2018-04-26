@@ -64,6 +64,13 @@
             <v-icon>add_a_photo</v-icon>
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
+          <span>{{getNumLikes(issue)}}</span>
+          <v-btn @click="unlike(issue)" flat icon color="red darken-2" v-if="likedByCurrUser(issue)">
+            <v-icon small>thumb_up</v-icon>
+          </v-btn>
+          <v-btn flat @click="like(issue)" icon v-if="!likedByCurrUser(issue)">
+            <v-icon small>thumb_up</v-icon>
+          </v-btn>
           <tagger :issueProp=issue></tagger>
         </v-card-actions>
       </v-container>
@@ -240,6 +247,8 @@
 
       closeIssue(){
         var toRemove = this.commentReference.filter(c => c.id == this.issue['.key']);
+        var issueLikes = this.likeReference.filter(l => l.id == this.issue['.key']);
+        issueLikes.forEach(iss => likeRef.child(iss['.key']).remove());
         toRemove.forEach(comm => this.removeComment(comm));
         issueRef.child(this.issue['.key']).remove();
       },
