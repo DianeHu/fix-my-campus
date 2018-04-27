@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import IssueView from '@/components/IssueView'
 import Contact from '@/components/Contact'
+import Services from '@/components/Services'
 import {storageRef } from '../database'
 
 Vue.use(Router)
@@ -23,6 +24,10 @@ export default new Router({
       path: '/contact',
       name: 'Contacts',
       component: Contact
+    },{
+      path: './services',
+      name: 'Services',
+      component: Services
     }
   ]
 })

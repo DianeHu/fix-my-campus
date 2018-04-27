@@ -18,3 +18,7 @@ export const commentRef = db.ref('comments');
 export const likeRef = db.ref('likes');
 export const tagRef = db.ref('tags');
 export const categoryRef = db.ref('categories');
+export const catRequestRef = db.ref('categoryRequests');
+export const adminRequestRef = db.ref('adminRequests');
+export const inboxRef = db.ref('inbox');
+

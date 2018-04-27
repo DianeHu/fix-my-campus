@@ -9,7 +9,7 @@
 
 <script>
   import {issueRef} from './database'
-  /*import login from './components/Login.vue'*/
+  import login from './components/Login.vue'
   export default{
     data () {
       return {
@@ -21,7 +21,7 @@
     },
 
     components: {
-      /*login*/
+      login
     },
 
     methods: {

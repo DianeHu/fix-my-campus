@@ -4,6 +4,7 @@
     <br>
     <v-btn to="/issues">Issues</v-btn>
     <v-btn to="/contact">Contacts</v-btn>
+    <v-btn to="/services">Services</v-btn>
   </div>
 </template>
 

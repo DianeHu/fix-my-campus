@@ -2,7 +2,7 @@
   <div>
     <div v-if="newIssue">
       <v-btn dark @click="dialog=true">Tag issue</v-btn>
-      <v-dialog v-model="dialog" scrollable max-width="300px">
+      <v-dialog persistent v-model="dialog" scrollable max-width="300px">
         <v-card>
           <v-card-title>Tag issue</v-card-title>
           <v-divider></v-divider>
@@ -41,7 +41,7 @@
 
     <div v-if="!newIssue">
       <v-btn dark @click="dialog=true">Tag issue</v-btn>
-      <v-dialog v-model="dialog" scrollable max-width="300px">
+      <v-dialog  persistent v-model="dialog" scrollable max-width="300px">
         <v-card>
           <v-card-title>Tag issue</v-card-title>
           <v-divider></v-divider>
