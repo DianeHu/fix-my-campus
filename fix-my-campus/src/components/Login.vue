@@ -19,16 +19,17 @@
 </template>
 
 <script>
+  import {storageRef} from '../database'
   import Firebase from 'firebase'
   import FirebaseUI from 'firebaseui'
   // single instance of popup credentials UI
   var authUI = new FirebaseUI.auth.AuthUI(Firebase.auth())
 
   export default {
-    name: "login",
+    name: 'login',
 
-    data(){
-      return{
+    data () {
+      return {
         newEmail: '',
         isShown: false
       }
@@ -39,51 +40,32 @@
       'setUser'
     ],
 
-    computed:{
-      user(){
+    computed: {
+      user () {
         return this.getUser()
       }
     },
 
-    methods:{
-      checkDukeStudent(){
-        this.newEmail = this.newEmail.trim();
-        if(this.newEmail){
-          var netID = "";
-          for(var i = 0; i < this.newEmail.length; i++){
-            if(this.newEmail[i] == "@"){
-              break;
+    methods: {
+      checkDukeStudent () {
+        this.newEmail = this.newEmail.trim()
+        if (this.newEmail) {
+          var netID = ''
+          for (var i = 0; i < this.newEmail.length; i++) {
+            if (this.newEmail[i] === '@') {
+              break
             }
-            netID += this.newEmail[i];
+            netID += this.newEmail[i]
           }
-          console.log(netID);
+          console.log(netID)
 
-          /*var myInit = { method: 'GET',
-            headers: new Headers({
-              "Access-Control-Allow-Origin": "*"
-            }),
-            mode: 'no-cors',
-            cache: 'default' };
-*/
-          var url="https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc";
+          var url = 'https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc'
 
           const proxyURL = "https://cors-anywhere.herokuapp.com/";
           fetch(proxyURL + url)
             .then(response => response.json())
             .then(contents => { console.log(contents) })
             .catch(() => console.log("Access to " + url + " is still blocked."))
-
-          /*var myRequest = new Request(url,myInit);
-          //running into same error as on Piazza
-          fetch(myRequest).then(response => response.json())
-            .then(data => {
-              var tester = data.items[0];
-              if(tester != null){
-                return true;
-              }
-            })
-            .catch(error => console.log(error))
-          return false;*/
         }
       },
       signInPopup () {

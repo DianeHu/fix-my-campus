@@ -5,11 +5,12 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import VueFire from 'vuefire'
+import IssueView from './components/IssueView.vue'
+import Home from './components/Home.vue'
 import 'vuetify/dist/vuetify.min.css'
 import 'firebaseui/dist/firebaseui.css'
 
-Vue.use(VueFire);
-
+Vue.use(VueFire)
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
