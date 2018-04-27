@@ -56,15 +56,23 @@
             }
             netID += newEmail[i]
           }
-          console.log(netID)
+          var student;
 
-          var url = 'https://streamer.oit.duke.edu/ldap/people/netid/" + netID + "?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc'
+          var url = 'https://streamer.oit.duke.edu/ldap/people/netid/' + netID + '?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc'
 
           const proxyURL = "https://cors-anywhere.herokuapp.com/";
           fetch(proxyURL + url)
             .then(response => response.json())
-            .then(contents => { console.log(contents) })
+            .then(contents => {
+              console.log(contents);
+              if(contents === undefined || contents.length == 0){
+                student = false;
+              } else{
+                student = true;
+              }
+            })
             .catch(() => console.log("Access to " + url + " is still blocked."))
+          return student;
         }
       },
 
@@ -79,15 +87,21 @@
             provider: Firebase.auth.EmailAuthProvider.PROVIDER_ID,
             requireDisplayName: true
           }],
-          // respond to authenticaion attempts
+          // respond to authentication attempts
           callbacks: {
             signInSuccessWithAuthResult: authResult => {
+              var check = this.checkDukeStudent(authResult.user.email);
+              console.log(check);
               // save interesting parts of user data
-              this.signIn(authResult.user)
-              // hide styling again
-              this.isShown = false
-              // do not redirect
-              return false
+              if(check === true && check !== undefined && check !== null){
+                this.signIn(authResult.user)
+                // hide styling again
+                this.isShown = false
+                // do not redirect
+                return false
+              } else{
+                alert("Please sign in with a Duke email, in the form netID@duke.edu");
+              }
             },
             uiShown: () => {
               // style UI container as a popup
@@ -104,6 +118,7 @@
           isAnonymous: user.isAnonymous
         })
       },
+
       signOut () {
         Firebase.auth().signOut()
         this.setUser(null)
