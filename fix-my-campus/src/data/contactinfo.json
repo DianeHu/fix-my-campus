@@ -1,0 +1,128 @@
+[
+  {
+    "Department" : "Parking and Transportation Services",
+    "Email" : "tranpark@duke.edu",
+    "Phone" : "919-684-PARK (7275)",
+    "Website" : "https://parking.duke.edu/contact.php"
+  },
+  {
+    "Department" : "Duke Innovation and Entrepreneurship",
+    "Email" : "entrepreneurship@duke.edu",
+    "Phone" : " 919-681-9165",
+    "Website" : "https://entrepreneurship.duke.edu/"
+  },
+  {
+    "Department" : "Central Campus HDRL",
+    "Email" : "rlhs-central@studentaffairs.duke.edu",
+    "Phone" : "919-684-5813",
+    "Website" : "https://studentaffairs.duke.edu/hdrl/contact-us"
+  },
+  {
+    "Department" : "East Campus HDRL",
+    "Email" : "rlhs-east@studentaffairs.duke.edu",
+    "Phone" : "919-684-5320",
+    "Website" : "https://studentaffairs.duke.edu/hdrl/contact-us"
+  },
+  {
+    "Department" : "West Campus HDRL",
+    "Email" : "rlhs-west@studentaffairs.duke.edu",
+    "Phone" : "919.684.5486",
+    "Website" : "https://studentaffairs.duke.edu/hdrl/contact-us"
+  },
+  {
+    "Department" : "Housing Assignments and Planning",
+    "Email" : "housing@duke.edu",
+    "Phone" : "919-684-4304",
+    "Website" : "https://studentaffairs.duke.edu/hdrl/contact-us"
+  },
+  {
+    "Department" : "Duke University Stores",
+    "Email" : "N/A",
+    "Phone" : "(919) 684-2065",
+    "Website" : "https://www.dukestores.duke.edu/about/contact.php"
+  },
+  {
+    "Department" : "Perkins and Bostock Libraries",
+    "Email" : "perkins-requests@duke.edu",
+    "Phone" : "(919) 660-5870",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Rubenstein Rare Boob & Manuscript Library",
+    "Email" : "N/A",
+    "Phone" : "(919) 660-5822",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Divinity School Library",
+    "Email" : "divlib@duke.edu",
+    "Phone" : "(919) 660-3450",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Ford Library, Fuqua School of Business",
+    "Email" : "ford-library-circulation@fuqua.duke.edu",
+    "Phone" : "(919) 660-7875",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Goodson Law Library",
+    "Email" : "cir@law.duke.edu",
+    "Phone" : "(919) 613-7128",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Library Service Center",
+    "Email" : "lsc-requests@duke.edu",
+    "Phone" : "(919) 613-6535",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Lilly Library",
+    "Email" : "lilly-requests@duke.edu",
+    "Phone" : "(919) 660-5995",
+    "Website" : "https://library.duke.edu/about/contact"
+  },
+  {
+    "Department" : "Duke Dining",
+    "Email" : "dining@duke.edu",
+    "Phone" : "919-660-3900",
+    "Website" : "https://studentaffairs.duke.edu/dining/contact"
+  },
+  {
+    "Department" : "Duke OIT",
+    "Email" : "N/A",
+    "Phone" : "919-684-2200",
+    "Website" : "https://oit.duke.edu/help"
+  },
+  {
+    "Department" : "Duke Vending and Concessions",
+    "Email" : "N/A",
+    "Phone" : "(919) 684-8363 ",
+    "Website" : "https://www.dukestores.duke.edu/food/vending_contact.php"
+  },
+  {
+    "Department" : "Duke University Facilities",
+    "Email" : "N/A",
+    "Phone" : "Multiple",
+    "Website" : "https://fmd.duke.edu/about/contact/index.php"
+  },
+  {
+    "Department" : "Duke Student Affairs",
+    "Email" : "studentaffairs@duke.edu",
+    "Phone" : "919.684.3737",
+    "Website" : "https://studentaffairs.duke.edu/contact-us-student-affairs"
+  },
+  {
+    "Department" : "Duke University Registrar",
+    "Email" : "registrar@duke.edu",
+    "Phone" : "919-684-2813",
+    "Website" : "https://registrar.duke.edu/"
+  },
+  {
+    "Department" : "Duke Student Health",
+    "Email" : "N/A",
+    "Phone" : "919-681-9355",
+    "Website" : "https://studentaffairs.duke.edu/studenthealth/contact-us"
+  }
+]
