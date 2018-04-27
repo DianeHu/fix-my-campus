@@ -10,9 +10,12 @@
           <i class="material-icons">add</i>
         </v-btn>
         <v-menu offset-y>
-          <v-btn color="primary" dark slot="activator">Filter by tags</v-btn>
+          <v-btn color="primary" dark slot="activator">Showing: {{getCurrCatTitle()}}</v-btn>
           <v-list>
-            <v-list-tile v-for="cat in categoryReference" :key="cat.title" @click="">
+            <v-list-tile color="darkcyan" @click="setFilter('All')">
+              <v-list-tile-title>All</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-for="cat in categoryReference" :key="cat.title" @click="setFilter(cat)">
               <v-list-tile-title>{{ cat.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -23,7 +26,7 @@
                     :closeIssue="closeAddIssue"
           ></newissue>
           <issue
-            v-for="issueItem in issueReference"
+            v-for="issueItem in filterIssueByCat()"
             :issue="issueItem"
             :currentUser="person.name"
           ></issue>
@@ -47,7 +50,8 @@
     data () {
       return {
         user: null,
-        addingIssue: false
+        addingIssue: false,
+        cat: 'All'
       }
     },
 
@@ -67,8 +71,37 @@
     },
 
     methods:{
-      filterIssueByCat(catTitle){
-        
+      getCurrCatTitle(){
+        if(this.cat == 'All') return 'All';
+        return this.cat.title;
+      },
+
+      setFilter(cat){
+        this.cat = cat;
+      },
+
+      filterIssueByCat(){
+        if(this.cat == "All"){
+          return this.issueReference;
+        } else{
+          var tagged = this.tagReference.filter(t => t.id == this.cat['.key']);
+          /*console.log("tagged");
+          console.log(tagged);
+          var returnable = [];
+          tagged.forEach(t => returnable.push(tagRef.child(t.owner)));
+          console.log(returnable);
+          return returnable;*/
+          var ret = this.issueReference.filter(i => this.issueIsTaggedBy(i, this.cat));
+          return ret;
+        }
+      },
+
+      issueIsTaggedBy(issue, cat){
+        /*id: cat['.key'],
+          owner: this.issueProp['.key']*/
+        var filter = this.tagReference.filter(t => t.id == cat['.key'] && t.owner == issue['.key']);
+        if(filter.length == 0) return false;
+        return true;
       },
 
       closeAddIssue(){
