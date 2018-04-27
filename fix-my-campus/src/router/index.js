@@ -24,8 +24,9 @@ export default new Router({
       path: '/contact',
       name: 'Contacts',
       component: Contact
-    },{
-      path: './services',
+    },
+    {
+      path: '/services',
       name: 'Services',
       component: Services
     }

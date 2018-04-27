@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>hiiii</h1>
     <requestadmin :user="person.name"></requestadmin>
     <categoryrequest :user="person.name"></categoryrequest>
   </div>

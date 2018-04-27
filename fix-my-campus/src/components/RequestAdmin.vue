@@ -1,8 +1,7 @@
 <template>
   <v-layout row justify-center>
-    <h1>Hiiiii</h1>
     <v-btn dark @click="dialog = true">Request to become a site administrator</v-btn>
-    <v-dialog v-model="dialog" persistent max-width="290">
+    <v-dialog v-model="dialog" persistent max-width="500">
       <v-card>
         <v-card-title class="headline">Request to become an administrator</v-card-title>
         <v-divider></v-divider>

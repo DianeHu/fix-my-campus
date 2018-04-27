@@ -1,7 +1,7 @@
 <template>
   <v-layout row justify-center>
     <v-btn dark @click="dialog=true">Request tag category</v-btn>
-    <v-dialog v-model="dialog" persistent max-width="290">
+    <v-dialog v-model="dialog" persistent max-width="500">
       <v-card>
         <v-card-title class="headline">Request to add tag category</v-card-title>
         <v-divider></v-divider>
