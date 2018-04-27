@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import IssueView from '@/components/IssueView'
-import Contact from '@/components/Contact'
-import Services from '@/components/Services'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from '@/components/Home';
+import IssueView from '@/components/IssueView';
+import Contact from '@/components/Contact';
+import Services from '@/components/Services';
+import Inbox from '@/components/Inbox';
 import {storageRef } from '../database'
 
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path: '/services',
       name: 'Services',
       component: Services
+    },
+    {
+      path: '/inbox',
+      name: 'Inbox',
+      component: Inbox
     }
   ]
 })
