@@ -23,6 +23,7 @@
     components: {
       login
     },
+
     methods: {
       getUser () {
         return this.user

@@ -12,8 +12,8 @@
         </v-btn>
         <v-layout row wrap>
           <newissue v-if="addingIssue"
-            :currentUser="user.name"
-            :closeIssue="closeAddIssue"
+                    :currentUser="user.name"
+                    :closeIssue="closeAddIssue"
           ></newissue>
           <issue
             v-for="issueItem in issueReference"
@@ -28,12 +28,13 @@
 
 <script>
 
-  import {storageRef } from '../database';
+  import { storageRef } from '../database';
   import {issueRef} from '../database';
+  import {tagRef} from '../database';
 
-  import login from './Login'
-  import newissue from './NewIssue';
-  import issue from './Issue';
+  import login from './login';
+  import newissue from './newissue';
+  import issue from './issue';
 
   export default {
     data () {
@@ -43,8 +44,9 @@
       }
     },
 
-    firebase: {
-      issueReference: issueRef
+    firebase:{
+      issueReference: issueRef,
+      tagReference: tagRef
     },
 
     components:{
@@ -56,11 +58,16 @@
     methods:{
       closeAddIssue(){
         this.addingIssue = false;
+        this.deleteAllTemps();
+      },
+
+      deleteAllTemps(){
+        var toRemove = this.tagReference.filter(t => t.owner == 'temp');
+        toRemove.forEach(r => tagRef.child(r['.key']).remove());
       },
 
       openAddIssue(){
         this.addingIssue = true;
-        console.log("turned to true");
       },
 
       getUser () {

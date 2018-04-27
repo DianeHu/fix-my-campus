@@ -19,27 +19,14 @@
         </v-toolbar-title>
         <v-spacer>
         </v-spacer>
-        <span>{{currentUser}}</span>
+        <span>{{currentUser}}
+          <v-chip label outline>{{currDate}}</v-chip>
+        </span>
       </v-toolbar>
       <v-container fluid grid-list-lg>
         <v-layout row>
           <v-flex xs7>
             <div>
-              <!--<div>{{currentUser}}</div>
-              <div class="headline">
-                <v-btn icon v-if="!editingTitle" @click="setEditTrue('Title')">
-                  <v-icon>mode_edit</v-icon>
-                </v-btn>
-                <v-text-field v-if="editingTitle"
-                              @keyup.enter="editTitle()"
-                              name="editIssueTitle"
-                              label="Title issue"
-                              v-model="renameTitle"
-                              style="display: inline-block;"
-                ></v-text-field>
-                <span v-else>{{renameTitle}}</span>
-              </div>
-              <div>-->
               <v-btn icon v-if="!editingDescription" @click="setEditTrue('Description')">
                 <v-icon small>mode_edit</v-icon>
               </v-btn>
@@ -61,6 +48,11 @@
             ></v-card-media>
           </v-flex>
         </v-layout>
+        <v-divider light></v-divider>
+        <v-chip outline color="black" v-for="tag in getTagsForIssue()">
+          {{tag}}
+        </v-chip>
+        <v-divider light></v-divider>
         <v-card-actions>
           <v-btn @click="closeIssue()" icon>
             <v-icon>delete</v-icon>
@@ -70,7 +62,7 @@
           </v-btn>
           <v-btn @click="submit()" flat>Submit</v-btn>
           <input ref="file" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
-          <v-chip outline>{{currDate}}</v-chip>
+          <tagger :newIssue=true></tagger>
         </v-card-actions>
       </v-container>
     </v-card>
@@ -80,9 +72,16 @@
 <script>
   import { storageRef } from '../database';
   import {issueRef} from '../database';
+  import {tagRef} from '../database';
+  import {categoryRef} from "../database";
+  import tagger from './tagger';
 
   export default {
     name: "newissue",
+
+    components:{
+      tagger
+    },
 
     data(){
       return{
@@ -98,7 +97,6 @@
     props:[
       'currentUser',
       'closeIssue',
-      'showing'
     ],
 
     computed:{
@@ -117,12 +115,26 @@
     },
 
     firebase:{
-      issueReference: issueRef
+      issueReference: issueRef,
+      tagReference: tagRef,
+      categoryReference: categoryRef
     },
 
     methods:{
+      getTagsForIssue(){
+        var tagged = this.tagReference.filter(t => t.owner == 'temp');
+        var titles = [];
+        for(var i = 0; i < tagged.length; i++){
+          var cat = this.categoryReference.filter(c => c['.key'] == tagged[i].id);
+          if(cat.length != 0){
+            titles.push(cat[0].title);
+          }
+        }
+        return titles;
+      },
+
       submit(){
-        if(this.renameTitle != 'Issue' && this.renameDescription !='Description'){
+        if(this.renameTitle != 'Issue' && this.renameDescription !='Description' && this.checkCategorySelected()){
           issueRef.push({
             title: this.renameTitle,
             description: this.renameDescription,
@@ -131,12 +143,29 @@
             image: this.image,
             owner: this.currentUser,
             date: this.date,
-            showComments: false
+            showComments: false,
+            justSubmitted: true
           });
+          var submittedIssue = this.issueReference.filter(i => i.justSubmitted == true);
+          this.convertTemps(submittedIssue[0]['.key']);
+          issueRef.child(submittedIssue[0]['.key']).update({justSubmitted: false});
           this.closeIssue();
+          this.renameTitle = 'Issue';
+          this.renameDescription = 'Description';
         } else{
-          alert("You didn't fill out all the required fields. Close the issue or fill out all required fields");
+          alert("You didn't fill out all the required fields. Close the issue or fill out all required fields (title, description, and at least one tag)");
         }
+      },
+
+      checkCategorySelected(){
+        var cats = this.tagReference.filter(t => t.owner == 'temp');
+        if(cats.length == 0) return false;
+        return true;
+      },
+
+      convertTemps(issue){
+        var convert = this.tagReference.filter(t => t.owner == 'temp');
+        convert.forEach(c => tagRef.child(c['.key']).update({owner: issue}));
       },
 
       setEditTrue(val){
