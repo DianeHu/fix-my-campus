@@ -12,10 +12,10 @@
         <v-menu offset-y>
           <v-btn color="primary" dark slot="activator">Showing: {{getCurrCatTitle()}}</v-btn>
           <v-list>
-            <v-list-tile color="darkcyan" @click="setFilter('All')">
+            <v-list-tile v-bind:style="{background : selectedOrNot('All')}" @click="setFilter('All')">
               <v-list-tile-title>All</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-for="cat in categoryReference" :key="cat.title" @click="setFilter(cat)">
+            <v-list-tile v-bind:style="{background : selectedOrNot(cat.title)}" v-for="cat in categoryReference" :key="cat.title" @click="setFilter(cat)">
               <v-list-tile-title>{{ cat.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -71,6 +71,11 @@
     },
 
     methods:{
+      selectedOrNot(catTitle){
+        if(this.cat == catTitle || this.cat.title == catTitle) return "lightgrey";
+        return "white";
+      },
+
       getCurrCatTitle(){
         if(this.cat == 'All') return 'All';
         return this.cat.title;
@@ -85,12 +90,6 @@
           return this.issueReference;
         } else{
           var tagged = this.tagReference.filter(t => t.id == this.cat['.key']);
-          /*console.log("tagged");
-          console.log(tagged);
-          var returnable = [];
-          tagged.forEach(t => returnable.push(tagRef.child(t.owner)));
-          console.log(returnable);
-          return returnable;*/
           var ret = this.issueReference.filter(i => this.issueIsTaggedBy(i, this.cat));
           return ret;
         }
