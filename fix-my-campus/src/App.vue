@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <div>
-      <!--<login :getUser="getUser" :setUser="setUser"></login>-->
-      <router-view></router-view>
+      <login :getUser="getUser" :setUser="setUser"></login>
+      <router-view :person = this.user></router-view>
     </div>
   </v-app>
 </template>
