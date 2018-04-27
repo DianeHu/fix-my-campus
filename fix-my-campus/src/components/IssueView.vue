@@ -15,11 +15,42 @@
             <v-list-tile v-bind:style="{background : selectedOrNot('All')}" @click="setFilter('All')">
               <v-list-tile-title>All</v-list-tile-title>
             </v-list-tile>
+            <v-list-tile v-bind:style="{background : selectedOrNot('Filter by date')}" @click="setFilter('Filter by date')">
+              <v-list-tile-title>Filter by date</v-list-tile-title>
+            </v-list-tile>
             <v-list-tile v-bind:style="{background : selectedOrNot(cat.title)}" v-for="cat in categoryReference" :key="cat.title" @click="setFilter(cat)">
               <v-list-tile-title>{{ cat.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
+        <!--<v-chip small disabled outline color="red darken-1" text-color="red darken-1">
+          <v-avatar large>
+            <v-menu offset-x left top allow-overflow full-width>
+              <v-btn slot="activator" icon small @click="card_deadline(card)">
+                <v-icon small color="red darken-1">date_range</v-icon>
+              </v-btn>
+              <v-flex xs12 sm6>
+                <v-date-picker color="red darken-1" v-model="currCardDeadline" v-on:input="card_deadline(card)" ></v-date-picker>
+              </v-flex>
+            </v-menu>
+          </v-avatar>
+          {{card.deadline}}
+        </v-chip>-->
+        <v-chip small disabled outline>
+          <v-avatar large>
+            <v-menu allow-overflow full-width>
+              <v-btn slot="activator" icon small>
+                <v-icon small>date_range</v-icon>
+              </v-btn>
+              <v-flex xs12 sm6>
+                <v-date-picker v-model="dateFilter"></v-date-picker>
+              </v-flex>
+            </v-menu>
+          </v-avatar>
+          {{dateFilter}}
+        </v-chip>
+        <!--<v-chip outline>Filter by date</v-chip>
+        <v-date-picker v-model="dateFilter"></v-date-picker>-->
         <v-layout row wrap>
           <newissue v-if="addingIssue"
                     :currentUser="person.name"
@@ -51,7 +82,9 @@
       return {
         user: null,
         addingIssue: false,
-        cat: 'All'
+        cat: 'All',
+        dateFilter: '',
+        showDatePicker: false
       }
     },
 
@@ -78,6 +111,7 @@
 
       getCurrCatTitle(){
         if(this.cat == 'All') return 'All';
+        if(this.cat == 'Filter by date') return 'Filter by date';
         return this.cat.title;
       },
 
@@ -85,10 +119,16 @@
         this.cat = cat;
       },
 
+      filterByDate(){
+
+      },
+
       filterIssueByCat(){
         if(this.cat == "All"){
           return this.issueReference;
-        } else{
+        }else if(this.cat == 'Filter by date'){
+          this.showDatePicker = true;
+        }else{
           var tagged = this.tagReference.filter(t => t.id == this.cat['.key']);
           var ret = this.issueReference.filter(i => this.issueIsTaggedBy(i, this.cat));
           return ret;
