@@ -90,18 +90,18 @@
           // respond to authentication attempts
           callbacks: {
             signInSuccessWithAuthResult: authResult => {
-              var check = this.checkDukeStudent(authResult.user.email);
-              console.log(check);
+              /*var check = this.checkDukeStudent(authResult.user.email);
+              console.log(check);*/
               // save interesting parts of user data
-              if(check === true && check !== undefined && check !== null){
+              /*if(check === true && check !== undefined && check !== null){*/
                 this.signIn(authResult.user)
                 // hide styling again
                 this.isShown = false
                 // do not redirect
                 return false
-              } else{
+              /*} else{
                 alert("Please sign in with a Duke email, in the form netID@duke.edu");
-              }
+              }*/
             },
             uiShown: () => {
               // style UI container as a popup

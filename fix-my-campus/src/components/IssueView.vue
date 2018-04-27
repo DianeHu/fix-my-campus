@@ -9,6 +9,14 @@
         <v-btn icon v-if="!addingIssue" @click="openAddIssue()">
           <i class="material-icons">add</i>
         </v-btn>
+        <v-menu offset-y>
+          <v-btn color="primary" dark slot="activator">Filter by tags</v-btn>
+          <v-list>
+            <v-list-tile v-for="cat in categoryReference" :key="cat.title" @click="">
+              <v-list-tile-title>{{ cat.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
         <v-layout row wrap>
           <newissue v-if="addingIssue"
                     :currentUser="person.name"
@@ -30,6 +38,7 @@
   import { storageRef } from '../database';
   import {issueRef} from '../database';
   import {tagRef} from '../database';
+  import {categoryRef} from "../database";
 
   import newissue from './newissue';
   import issue from './issue';
@@ -48,7 +57,8 @@
 
     firebase:{
       issueReference: issueRef,
-      tagReference: tagRef
+      tagReference: tagRef,
+      categoryReference: categoryRef
     },
 
     components:{
@@ -57,6 +67,10 @@
     },
 
     methods:{
+      filterIssueByCat(catTitle){
+        
+      },
+
       closeAddIssue(){
         this.addingIssue = false;
         this.deleteAllTemps();
