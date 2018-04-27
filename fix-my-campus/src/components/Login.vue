@@ -68,6 +68,7 @@
             .catch(() => console.log("Access to " + url + " is still blocked."))
         }
       },
+
       signInPopup () {
         authUI.start('#firebaseui-auth-container', {
           // open the authentication flow as a popup

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div>
-      <login :getUser="getUser" :setUser="setUser"></login>
+      <!--<login :getUser="getUser" :setUser="setUser"></login>-->
       <router-view></router-view>
     </div>
   </v-app>
@@ -9,7 +9,7 @@
 
 <script>
   import {issueRef} from './database'
-  import login from './components/Login.vue'
+  /*import login from './components/Login.vue'*/
   export default{
     data () {
       return {
@@ -21,7 +21,7 @@
     },
 
     components: {
-      login
+      /*login*/
     },
 
     methods: {
