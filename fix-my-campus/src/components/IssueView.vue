@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <login :getUser="getUser" :setUser="setUser"></login>
-    <v-card v-if="user">
+    <v-card v-if="person">
       <v-container
         fluid
         style="min-height: 0;"
@@ -12,13 +11,13 @@
         </v-btn>
         <v-layout row wrap>
           <newissue v-if="addingIssue"
-                    :currentUser="user.name"
+                    :currentUser="person.name"
                     :closeIssue="closeAddIssue"
           ></newissue>
           <issue
             v-for="issueItem in issueReference"
             :issue="issueItem"
-            :currentUser="user.name"
+            :currentUser="person.name"
           ></issue>
         </v-layout>
       </v-container>
@@ -32,7 +31,6 @@
   import {issueRef} from '../database';
   import {tagRef} from '../database';
 
-  import login from './login';
   import newissue from './newissue';
   import issue from './issue';
 
@@ -44,13 +42,16 @@
       }
     },
 
+    props: [
+      'person'
+    ],
+
     firebase:{
       issueReference: issueRef,
       tagReference: tagRef
     },
 
     components:{
-      login,
       issue,
       newissue
     },
