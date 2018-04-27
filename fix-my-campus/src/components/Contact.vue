@@ -2,21 +2,25 @@
   <div class = "compPadding">
     <h1>Duke Facility Contact Information</h1>
     <hr>
-    <v-container>
-      <v-card v-for="card in contactList">
-        <v-card-text>
-          {{card.Department}}
-        </v-card-text>
-        <v-card-text>
-          {{card.Email}}
-        </v-card-text>
-        <v-card-text>
-          {{card.Phone}}
-        </v-card-text>
-        <v-card-text>
-          {{card.Website}}
-        </v-card-text>
-      </v-card>
+    <v-container grid-list-xl>
+      <v-layout column>
+        <v-flex v-for="card in contactList">
+          <v-card dark>
+            <v-card-title>
+              {{card.Department}}
+            </v-card-title>
+            <v-card-text>
+              Email : {{card.Email}}
+            </v-card-text>
+            <v-card-text>
+              Phone Number : {{card.Phone}}
+            </v-card-text>
+            <v-card-text>
+              <a :href=card.Website>Website</a>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
 </template>
@@ -25,12 +29,11 @@
   import contacts from '../data/contactinfo'
 
   export default{
-    data(){
-      return{
-        contactList : contacts
+    data () {
+      return {
+        contactList: contacts
       }
-    },
-
+    }
   }
 </script>
 
