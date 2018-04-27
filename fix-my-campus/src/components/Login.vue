@@ -30,7 +30,6 @@
 
     data () {
       return {
-        newEmail: '',
         isShown: false
       }
     },
@@ -47,15 +46,15 @@
     },
 
     methods: {
-      checkDukeStudent () {
-        this.newEmail = this.newEmail.trim()
-        if (this.newEmail) {
+      checkDukeStudent (newEmail) {
+        newEmail = newEmail.trim()
+        if (newEmail) {
           var netID = ''
-          for (var i = 0; i < this.newEmail.length; i++) {
-            if (this.newEmail[i] === '@') {
+          for (var i = 0; i < newEmail.length; i++) {
+            if (newEmail[i] === '@') {
               break
             }
-            netID += this.newEmail[i]
+            netID += newEmail[i]
           }
           console.log(netID)
 
