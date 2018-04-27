@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="person">
     <requestadmin :user="person.name"></requestadmin>
     <categoryrequest :user="person.name"></categoryrequest>
   </div>

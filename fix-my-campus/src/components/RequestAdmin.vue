@@ -68,7 +68,7 @@
           inboxRef.push({
             title: 'Pending request: become site administrator',
             type: 'admin',
-            user: this.user,
+            op: this.user,
             date: today
           })
 

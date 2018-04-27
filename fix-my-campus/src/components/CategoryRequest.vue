@@ -63,7 +63,8 @@
         this.newDescription = this.newDescription.trim();
         if(this.newTag && this.newDescription){
           catRequestRef.push({
-            title: this.newTag
+            title: this.newTag,
+            description: this.newDescription
           })
           this.dialog = false;
 
@@ -79,7 +80,8 @@
           inboxRef.push({
             title: 'Pending request: add tag category ' + this.newTag,
             type: 'category',
-            user: this.user,
+            cat: this.newTag,
+            op: this.user,
             date: today
           })
 
