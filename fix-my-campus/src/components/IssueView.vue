@@ -36,21 +36,37 @@
           </v-avatar>
           {{card.deadline}}
         </v-chip>-->
-        <v-chip small disabled outline>
-          <v-avatar large>
-            <v-menu allow-overflow full-width>
-              <v-btn slot="activator" icon small>
-                <v-icon small>date_range</v-icon>
-              </v-btn>
-              <v-flex xs12 sm6>
-                <v-date-picker v-model="dateFilter"></v-date-picker>
-              </v-flex>
-            </v-menu>
-          </v-avatar>
-          {{dateFilter}}
-        </v-chip>
-        <!--<v-chip outline>Filter by date</v-chip>
-        <v-date-picker v-model="dateFilter"></v-date-picker>-->
+        <!-- <v-layout row justify-center>
+           <v-dialog v-model="showDatePicker">
+             <v-card>
+               <v-flex xs12 sm6>
+                 <v-date-picker v-model="dateFilter"></v-date-picker>
+               </v-flex>
+             </v-card>
+             <v-card-actions>
+               <v-btn @click="removeDatePicker()">Filter</v-btn>
+             </v-card-actions>
+           </v-dialog>
+         </v-layout>-->
+        <span v-if="showDatePicker">
+          <v-chip small disabled outline>
+            <v-avatar large>
+              <v-menu allow-overflow full-width>
+                <v-btn slot="activator" icon small>
+                  <v-icon small>date_range</v-icon>
+                </v-btn>
+                <v-flex xs12 sm6>
+                  <v-date-picker v-model="dateFilter"></v-date-picker>
+                </v-flex>
+              </v-menu>
+            </v-avatar>
+            {{dateFilter}}
+          </v-chip>
+          <v-btn icon @click="removeDatePicker()">
+            <v-icon small>close</v-icon>
+          </v-btn>
+        </span>
+
         <v-layout row wrap>
           <newissue v-if="addingIssue"
                     :currentUser="person.name"
@@ -104,6 +120,10 @@
     },
 
     methods:{
+      removeDatePicker(){
+        this.cat = 'All';
+      },
+
       selectedOrNot(catTitle){
         if(this.cat == catTitle || this.cat.title == catTitle) return "lightgrey";
         return "white";
@@ -111,7 +131,7 @@
 
       getCurrCatTitle(){
         if(this.cat == 'All') return 'All';
-        if(this.cat == 'Filter by date') return 'Filter by date';
+        if(this.cat == 'Filter by date') return (this.dateFilter == '')? 'date not selected': 'Created ' + this.dateFilter;
         return this.cat.title;
       },
 
@@ -120,16 +140,23 @@
       },
 
       filterByDate(){
-
+        var date = this.dateFilter.split('-');
+        var filterDate = date[1] + '/' + date[2] + '/' + date[0];
+        var filterByDate = this.issueReference.filter(i => i.date == filterDate);
+        return filterByDate;
       },
 
       filterIssueByCat(){
         if(this.cat == "All"){
+          this.dateFilter = '';
+          this.showDatePicker = false;
           return this.issueReference;
         }else if(this.cat == 'Filter by date'){
           this.showDatePicker = true;
+          return this.filterByDate();
         }else{
-          var tagged = this.tagReference.filter(t => t.id == this.cat['.key']);
+          this.dateFilter = '';
+          this.showDatePicker = false;
           var ret = this.issueReference.filter(i => this.issueIsTaggedBy(i, this.cat));
           return ret;
         }
