@@ -69,7 +69,9 @@
             <v-icon>add_a_photo</v-icon>
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
-          <tagger :issueProp=issue :newIssue=false></tagger>
+          <tagger v-if="issue.owner == currentUser" :issueProp=issue :newIssue=false></tagger>
+          <v-btn dark v-if="!isFollowing()" @click="follow()">Follow</v-btn>
+          <v-btn dark v-if="isFollowing()" @click="unfollow()">Unfollow</v-btn>
           <v-spacer></v-spacer>
           <span>{{getNumLikes(issue)}}</span>
           <v-btn @click="unlike(issue)" flat icon color="red darken-2" v-if="likedByCurrUser(issue)">
@@ -130,6 +132,8 @@
   import {tagRef} from '../database';
   import {likeRef} from '../database';
   import tagger from './tagger';
+  import {followRef} from "../database";
+  import {inboxRef} from "../database";
 
   export default {
     name: "issue",
@@ -154,7 +158,9 @@
       commentReference: commentRef,
       tagReference: tagRef,
       likeReference: likeRef,
-      categoryReference: categoryRef
+      categoryReference: categoryRef,
+      followReference: followRef,
+      inboxReference: inboxRef
     },
 
     computed:{
@@ -166,6 +172,24 @@
     },
 
     methods:{
+      isFollowing(){
+        var filtered = this.followReference.filter(f => f.follower == this.currentUser && f.issue == this.issue['.key']);
+        if(filtered.length == 0) return false;
+        return true;
+      },
+
+      follow(){
+        followRef.push({
+          follower: this.currentUser,
+          issue: this.issue['.key']
+        })
+      },
+
+      unfollow(){
+        var filtered = this.followReference.filter(f => f.follower == this.currentUser && f.issue == this.issue['.key']);
+        followRef.child(filtered[0]['.key']).remove();
+      },
+
       getTagsForIssue(){
         var tagged = this.tagReference.filter(t => t.owner == this.issue['.key']);
         var titles = [];
@@ -227,8 +251,35 @@
             id: this.issue['.key'],
             date: today
           })
+          this.updateFollowers();
           this.newComment = '';
+          issueRef.child(this.issue['.key']).update({mostRecentUpdate: Date.now() * -1});
         }
+      },
+
+      updateFollowers(){
+        var today = new Date();
+        var d = today.getDate();
+        var m = today.getMonth() + 1;
+        var y = today.getFullYear();
+
+        if(d < 10) d = '0' + d;
+        if(m < 10) m = '0' + m;
+        today = m + '/' + d + '/' + y;
+
+        var following = this.followReference.filter(f => f.issue == this.issue['.key']);
+        following.forEach(f => this.singleUpdate(today, f));
+      },
+
+      singleUpdate(today, follow){
+        inboxRef.push({
+          title: 'Comment added to issue: ' + this.issue['title'],
+          comment: this.newComment,
+          type: 'Following',
+          recipient: follow.follower,
+          commenter: this.currentUser,
+          date: today
+        })
       },
 
       cancelComment(){

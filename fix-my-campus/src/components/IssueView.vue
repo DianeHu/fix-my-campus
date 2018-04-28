@@ -15,11 +15,58 @@
             <v-list-tile v-bind:style="{background : selectedOrNot('All')}" @click="setFilter('All')">
               <v-list-tile-title>All</v-list-tile-title>
             </v-list-tile>
+            <v-list-tile v-bind:style="{background : selectedOrNot('Filter by date')}" @click="setFilter('Filter by date')">
+              <v-list-tile-title>Filter by date</v-list-tile-title>
+            </v-list-tile>
             <v-list-tile v-bind:style="{background : selectedOrNot(cat.title)}" v-for="cat in categoryReference" :key="cat.title" @click="setFilter(cat)">
               <v-list-tile-title>{{ cat.title }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
+        <!--<v-chip small disabled outline color="red darken-1" text-color="red darken-1">
+          <v-avatar large>
+            <v-menu offset-x left top allow-overflow full-width>
+              <v-btn slot="activator" icon small @click="card_deadline(card)">
+                <v-icon small color="red darken-1">date_range</v-icon>
+              </v-btn>
+              <v-flex xs12 sm6>
+                <v-date-picker color="red darken-1" v-model="currCardDeadline" v-on:input="card_deadline(card)" ></v-date-picker>
+              </v-flex>
+            </v-menu>
+          </v-avatar>
+          {{card.deadline}}
+        </v-chip>-->
+        <!-- <v-layout row justify-center>
+           <v-dialog v-model="showDatePicker">
+             <v-card>
+               <v-flex xs12 sm6>
+                 <v-date-picker v-model="dateFilter"></v-date-picker>
+               </v-flex>
+             </v-card>
+             <v-card-actions>
+               <v-btn @click="removeDatePicker()">Filter</v-btn>
+             </v-card-actions>
+           </v-dialog>
+         </v-layout>-->
+        <span v-if="showDatePicker">
+          <v-chip small disabled outline>
+            <v-avatar large>
+              <v-menu allow-overflow full-width>
+                <v-btn slot="activator" icon small>
+                  <v-icon small>date_range</v-icon>
+                </v-btn>
+                <v-flex xs12 sm6>
+                  <v-date-picker v-model="dateFilter"></v-date-picker>
+                </v-flex>
+              </v-menu>
+            </v-avatar>
+            {{dateFilter}}
+          </v-chip>
+          <v-btn icon @click="removeDatePicker()">
+            <v-icon small>close</v-icon>
+          </v-btn>
+        </span>
+
         <v-layout row wrap>
           <newissue v-if="addingIssue"
                     :currentUser="person.name"
@@ -51,7 +98,9 @@
       return {
         user: null,
         addingIssue: false,
-        cat: 'All'
+        cat: 'All',
+        dateFilter: '',
+        showDatePicker: false
       }
     },
 
@@ -60,7 +109,7 @@
     ],
 
     firebase:{
-      issueReference: issueRef,
+      issueReference: issueRef.orderByChild('mostRecentUpdate'),
       tagReference: tagRef,
       categoryReference: categoryRef
     },
@@ -71,6 +120,10 @@
     },
 
     methods:{
+      removeDatePicker(){
+        this.cat = 'All';
+      },
+
       selectedOrNot(catTitle){
         if(this.cat == catTitle || this.cat.title == catTitle) return "lightgrey";
         return "white";
@@ -78,6 +131,7 @@
 
       getCurrCatTitle(){
         if(this.cat == 'All') return 'All';
+        if(this.cat == 'Filter by date') return (this.dateFilter == '')? 'date not selected': 'Created ' + this.dateFilter;
         return this.cat.title;
       },
 
@@ -85,11 +139,24 @@
         this.cat = cat;
       },
 
+      filterByDate(){
+        var date = this.dateFilter.split('-');
+        var filterDate = date[1] + '/' + date[2] + '/' + date[0];
+        var filterByDate = this.issueReference.filter(i => i.date == filterDate);
+        return filterByDate;
+      },
+
       filterIssueByCat(){
         if(this.cat == "All"){
+          this.dateFilter = '';
+          this.showDatePicker = false;
           return this.issueReference;
-        } else{
-          var tagged = this.tagReference.filter(t => t.id == this.cat['.key']);
+        }else if(this.cat == 'Filter by date'){
+          this.showDatePicker = true;
+          return this.filterByDate();
+        }else{
+          this.dateFilter = '';
+          this.showDatePicker = false;
           var ret = this.issueReference.filter(i => this.issueIsTaggedBy(i, this.cat));
           return ret;
         }
