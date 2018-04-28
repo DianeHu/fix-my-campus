@@ -3,22 +3,31 @@
     <v-toolbar-title v-if="user">{{user.name}}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat @click="signOut" v-if="user">
-        <a>
-          <span class="glyphicon glyphicon-log-out">Logout</span>
-        </a>
-      </v-btn>
-      <v-btn flat @click="signInPopup" v-else>
-        <a>
-          <span class="glyphicon glyphicon-user">Sign In</span>
-        </a>
-      </v-btn>
+      <v-container v-if="user">
+        <v-menu offset-y>
+          <v-btn slot="activator">Authenticate Account</v-btn>
+          <user-auth></user-auth>
+        </v-menu>
+        <v-btn flat @click="signOut" >
+          <a>
+            <span class="glyphicon glyphicon-log-out">Logout</span>
+          </a>
+        </v-btn>
+      </v-container>
+      <div v-else>
+        <v-btn flat @click="signInPopup">
+          <a>
+            <span class="glyphicon glyphicon-user">Sign In</span>
+          </a>
+        </v-btn>
+      </div>
       <div id="firebaseui-auth-container" :class="{ popup: isShown }"></div>
     </v-toolbar-items>
   </v-toolbar>
 </template>
 
 <script>
+  import UserAuthenticator from './UserAuthenticator.vue'
   import {storageRef} from '../database'
   import Firebase from 'firebase'
   import FirebaseUI from 'firebaseui'
@@ -38,6 +47,9 @@
       'getUser',
       'setUser'
     ],
+    components: {
+      UserAuth: UserAuthenticator
+    },
 
     computed: {
       user () {
@@ -94,11 +106,11 @@
               console.log(check);*/
               // save interesting parts of user data
               /*if(check === true && check !== undefined && check !== null){*/
-                this.signIn(authResult.user)
-                // hide styling again
-                this.isShown = false
-                // do not redirect
-                return false
+              this.signIn(authResult.user)
+              // hide styling again
+              this.isShown = false
+              // do not redirect
+              return false
               /*} else{
                 alert("Please sign in with a Duke email, in the form netID@duke.edu");
               }*/
