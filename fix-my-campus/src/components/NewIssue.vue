@@ -143,6 +143,7 @@
             image: this.image,
             owner: this.currentUser,
             date: this.date,
+            mostRecentUpdate: Date.now() * -1,
             showComments: false,
             justSubmitted: true
           });

@@ -7,12 +7,12 @@
           <v-card-title>Tag issue</v-card-title>
           <v-divider></v-divider>
           <v-card-text style="height: 300px;">
-            <v-text-field @keyup.enter="addNewCategory()"
+            <!--<v-text-field @keyup.enter="addNewCategory()"
                           name="createCat"
                           label="Create new category"
                           v-model="newCategory"
                           style="display: inline-block;"
-            ></v-text-field>
+            ></v-text-field>-->
             <v-container fluid>
               <v-list-tile v-for="singleCat in categoryReference">
                 <v-list-tile-action v-if="getTempSelected(singleCat)">
@@ -46,12 +46,12 @@
           <v-card-title>Tag issue</v-card-title>
           <v-divider></v-divider>
           <v-card-text style="height: 300px;">
-            <v-text-field @keyup.enter="addNewCategory()"
+            <!--<v-text-field @keyup.enter="addNewCategory()"
                           name="createCat"
                           label="Create new category"
                           v-model="newCategory"
                           style="display: inline-block;"
-            ></v-text-field>
+            ></v-text-field>-->
             <v-container fluid>
               <v-list-tile v-for="singleCat in categoryReference">
                 <v-list-tile-action v-if="getSelected(singleCat)">

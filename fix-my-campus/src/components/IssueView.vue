@@ -109,7 +109,7 @@
     ],
 
     firebase:{
-      issueReference: issueRef,
+      issueReference: issueRef.orderByChild('mostRecentUpdate'),
       tagReference: tagRef,
       categoryReference: categoryRef
     },

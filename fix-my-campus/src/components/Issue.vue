@@ -228,6 +228,7 @@
             date: today
           })
           this.newComment = '';
+          issueRef.child(this.issue['.key']).update({mostRecentUpdate: Date.now() * -1});
         }
       },
 
