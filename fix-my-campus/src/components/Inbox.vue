@@ -4,7 +4,7 @@
                  style="min-height: 0;"
                  grid-list-lg>
       <v-layout row wrap>
-        <v-flex xs12 sm12 md4 v-for="msg in inboxReference">
+        <v-flex xs12 sm12 md4 v-for="msg in getNonFollowUpdates()">
           <v-card>
             <v-toolbar color="grey lighten-2" dense>
               <v-toolbar-title>
@@ -15,6 +15,31 @@
             </v-toolbar>
             <v-card-text>
               {{msg.title}}
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-chip>{{msg.type}}</v-chip>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <v-flex xs12 sm12 md4 v-for="msg in getFollowUpdates()">
+          <v-card>
+            <v-toolbar color="grey lighten-2" dense>
+              <v-toolbar-title>
+                {{msg.commenter}} ({{msg.date}})
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn @click="removeMsg(msg)" icon>
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-card-text>
+              {{msg.title}}
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-text>
+              {{msg.comment}}
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -76,6 +101,20 @@
     ],
 
     methods:{
+      removeMsg(msg){
+        inboxRef.child(msg['.key']).remove();
+      },
+
+      getNonFollowUpdates(){
+        var ret = this.inboxReference.filter(i => i.type != 'Following');
+        return ret;
+      },
+
+      getFollowUpdates(){
+        var ret = this.inboxReference.filter(i => i.type == 'Following');
+        return ret;
+      },
+
       resolve(msg){
         if(msg.type == 'category'){
           this.setCurrCatRequest(msg);
