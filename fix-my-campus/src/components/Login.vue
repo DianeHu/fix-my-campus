@@ -4,10 +4,10 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-container v-if="user">
-        <v-menu offset-y>
+        <v-dialog v-if=!this.isRealAccount() v-model="dialog" max-width="30%">
           <v-btn slot="activator">Authenticate Account</v-btn>
-          <user-auth></user-auth>
-        </v-menu>
+          <user-auth :dialog=dialog :user=user></user-auth>
+        </v-dialog>
         <v-btn flat @click="signOut" >
           <a>
             <span class="glyphicon glyphicon-log-out">Logout</span>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import {userRef} from '../database'
   import UserAuthenticator from './UserAuthenticator.vue'
   import {storageRef} from '../database'
   import Firebase from 'firebase'
@@ -39,8 +40,13 @@
 
     data () {
       return {
-        isShown: false
+        isShown: false,
+        dialog: false
       }
+    },
+
+    firebase: {
+      UserReference: userRef
     },
 
     props: [
@@ -58,6 +64,10 @@
     },
 
     methods: {
+      isRealAccount () {
+        return (this.UserReference.filter(u => u.name === this.user.name).length > 0)
+      },
+
       checkDukeStudent (newEmail) {
         newEmail = newEmail.trim()
         if (newEmail) {

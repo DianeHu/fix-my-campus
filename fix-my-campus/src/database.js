@@ -13,6 +13,7 @@ var fb = Firebase.initializeApp(config);
 
 export const db = fb.database();
 export const storageRef = fb.storage().ref();
+export const userRef = db.ref('users');
 export const issueRef = db.ref('issues');
 export const commentRef = db.ref('comments');
 export const likeRef = db.ref('likes');
