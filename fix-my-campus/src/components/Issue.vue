@@ -85,7 +85,7 @@
 
       <div v-if="issue.showComments">
         <v-card v-for="comment in getComments()">
-          <v-toolbar color="grey lighten-2" dense>
+          <v-toolbar v-bind:color="isAdmin(comment.owner)" :dark="getAdminCol(comment.owner)" dense>
             <v-toolbar-title>
               {{comment.owner}} ({{comment.date}})
             </v-toolbar-title>
@@ -174,6 +174,22 @@
     },
 
     methods:{
+      isAdmin(name){
+        var filtered = this.userReference.filter(u => u.name == name);
+        if(filtered[0].isAdmin == true){
+          return "primary";
+        }
+        return "grey lighten-2";
+      },
+
+      getAdminCol(name){
+        var filtered = this.userReference.filter(u => u.name == name);
+        if(filtered[0].isAdmin == true){
+          return true;
+        }
+        return false;
+      },
+
       isAuthenticatedUser(){
         var filtered = this.userReference.filter(u => u.name == this.currentUser);
         if(filtered.length == 0) return false;
