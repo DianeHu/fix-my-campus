@@ -6,7 +6,7 @@
         style="min-height: 0;"
         grid-list-lg
       >
-        <v-btn icon v-if="!addingIssue" @click="openAddIssue()">
+        <v-btn icon v-if="!addingIssue && isAuthenticatedUser()" @click="openAddIssue()">
           <i class="material-icons">add</i>
         </v-btn>
         <v-menu offset-y>
@@ -64,6 +64,7 @@
   import {issueRef} from '../database';
   import {tagRef} from '../database';
   import {categoryRef} from "../database";
+  import {userRef} from "../database";
 
   import newissue from './newissue';
   import issue from './issue';
@@ -86,7 +87,8 @@
     firebase:{
       issueReference: issueRef.orderByChild('mostRecentUpdate'),
       tagReference: tagRef,
-      categoryReference: categoryRef
+      categoryReference: categoryRef,
+      userReference: userRef
     },
 
     components:{
@@ -95,6 +97,12 @@
     },
 
     methods:{
+      isAuthenticatedUser(){
+        var filtered = this.userReference.filter(u => u.name == this.person.name);
+        if(filtered.length == 0) return false;
+        return true;
+      },
+
       removeDatePicker(){
         this.cat = 'All';
       },
