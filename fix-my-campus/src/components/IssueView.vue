@@ -23,31 +23,6 @@
             </v-list-tile>
           </v-list>
         </v-menu>
-        <!--<v-chip small disabled outline color="red darken-1" text-color="red darken-1">
-          <v-avatar large>
-            <v-menu offset-x left top allow-overflow full-width>
-              <v-btn slot="activator" icon small @click="card_deadline(card)">
-                <v-icon small color="red darken-1">date_range</v-icon>
-              </v-btn>
-              <v-flex xs12 sm6>
-                <v-date-picker color="red darken-1" v-model="currCardDeadline" v-on:input="card_deadline(card)" ></v-date-picker>
-              </v-flex>
-            </v-menu>
-          </v-avatar>
-          {{card.deadline}}
-        </v-chip>-->
-        <!-- <v-layout row justify-center>
-           <v-dialog v-model="showDatePicker">
-             <v-card>
-               <v-flex xs12 sm6>
-                 <v-date-picker v-model="dateFilter"></v-date-picker>
-               </v-flex>
-             </v-card>
-             <v-card-actions>
-               <v-btn @click="removeDatePicker()">Filter</v-btn>
-             </v-card-actions>
-           </v-dialog>
-         </v-layout>-->
         <span v-if="showDatePicker">
           <v-chip small disabled outline>
             <v-avatar large>
