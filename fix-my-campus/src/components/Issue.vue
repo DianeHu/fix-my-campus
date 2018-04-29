@@ -70,8 +70,8 @@
           </v-btn>
           <input ref="fileNew" style="display: none" type="file" id="images" name="files[]" @change="addImage"/>
           <tagger v-if="issue.owner == currentUser" :issueProp=issue :newIssue=false></tagger>
-          <v-btn dark v-if="!isFollowing()" @click="follow()">Follow</v-btn>
-          <v-btn dark v-if="isFollowing()" @click="unfollow()">Unfollow</v-btn>
+          <v-btn dark v-if="!isFollowing() && isAuthenticatedUser()" @click="follow()">Follow</v-btn>
+          <v-btn dark v-if="isFollowing() && isAuthenticatedUser()" @click="unfollow()">Unfollow</v-btn>
           <v-spacer></v-spacer>
           <span>{{getNumLikes(issue)}}</span>
           <v-btn @click="unlike(issue)" flat icon color="red darken-2" v-if="likedByCurrUser(issue)">
@@ -106,7 +106,7 @@
           </v-card-text>
         </v-card>
         <v-divider></v-divider>
-        <v-card>
+        <v-card v-if="isAuthenticatedUser()">
           <v-text-field textarea
                         name="addingComment"
                         label="Add a comment"
@@ -134,6 +134,7 @@
   import tagger from './tagger';
   import {followRef} from "../database";
   import {inboxRef} from "../database";
+  import {userRef} from "../database";
 
   export default {
     name: "issue",
@@ -160,7 +161,8 @@
       likeReference: likeRef,
       categoryReference: categoryRef,
       followReference: followRef,
-      inboxReference: inboxRef
+      inboxReference: inboxRef,
+      userReference: userRef
     },
 
     computed:{
@@ -172,6 +174,12 @@
     },
 
     methods:{
+      isAuthenticatedUser(){
+        var filtered = this.userReference.filter(u => u.name == this.currentUser);
+        if(filtered.length == 0) return false;
+        return true;
+      },
+
       isFollowing(){
         var filtered = this.followReference.filter(f => f.follower == this.currentUser && f.issue == this.issue['.key']);
         if(filtered.length == 0) return false;
@@ -222,10 +230,14 @@
       },
 
       like(comm){
-        likeRef.push({
-          id: comm['.key'],
-          liker: this.currentUser
-        })
+        if(this.isAuthenticatedUser()){
+          likeRef.push({
+            id: comm['.key'],
+            liker: this.currentUser
+          })
+        } else{
+          alert("You must be an authenticated Duke user to complete this action.")
+        }
       },
 
       unlike(comm){

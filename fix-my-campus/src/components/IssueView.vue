@@ -6,7 +6,7 @@
         style="min-height: 0;"
         grid-list-lg
       >
-        <v-btn icon v-if="!addingIssue" @click="openAddIssue()">
+        <v-btn icon v-if="!addingIssue && isAuthenticatedUser()" @click="openAddIssue()">
           <i class="material-icons">add</i>
         </v-btn>
         <v-menu offset-y>
@@ -23,31 +23,6 @@
             </v-list-tile>
           </v-list>
         </v-menu>
-        <!--<v-chip small disabled outline color="red darken-1" text-color="red darken-1">
-          <v-avatar large>
-            <v-menu offset-x left top allow-overflow full-width>
-              <v-btn slot="activator" icon small @click="card_deadline(card)">
-                <v-icon small color="red darken-1">date_range</v-icon>
-              </v-btn>
-              <v-flex xs12 sm6>
-                <v-date-picker color="red darken-1" v-model="currCardDeadline" v-on:input="card_deadline(card)" ></v-date-picker>
-              </v-flex>
-            </v-menu>
-          </v-avatar>
-          {{card.deadline}}
-        </v-chip>-->
-        <!-- <v-layout row justify-center>
-           <v-dialog v-model="showDatePicker">
-             <v-card>
-               <v-flex xs12 sm6>
-                 <v-date-picker v-model="dateFilter"></v-date-picker>
-               </v-flex>
-             </v-card>
-             <v-card-actions>
-               <v-btn @click="removeDatePicker()">Filter</v-btn>
-             </v-card-actions>
-           </v-dialog>
-         </v-layout>-->
         <span v-if="showDatePicker">
           <v-chip small disabled outline>
             <v-avatar large>
@@ -89,6 +64,7 @@
   import {issueRef} from '../database';
   import {tagRef} from '../database';
   import {categoryRef} from "../database";
+  import {userRef} from "../database";
 
   import newissue from './newissue';
   import issue from './issue';
@@ -111,7 +87,8 @@
     firebase:{
       issueReference: issueRef.orderByChild('mostRecentUpdate'),
       tagReference: tagRef,
-      categoryReference: categoryRef
+      categoryReference: categoryRef,
+      userReference: userRef
     },
 
     components:{
@@ -120,6 +97,12 @@
     },
 
     methods:{
+      isAuthenticatedUser(){
+        var filtered = this.userReference.filter(u => u.name == this.person.name);
+        if(filtered.length == 0) return false;
+        return true;
+      },
+
       removeDatePicker(){
         this.cat = 'All';
       },
