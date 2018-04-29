@@ -23,5 +23,5 @@ export const catRequestRef = db.ref('categoryRequests');
 export const adminRequestRef = db.ref('adminRequests');
 export const inboxRef = db.ref('inbox');
 export const followRef = db.ref('following');
-export const adminPosts = db.ref('adminPosts');
+export const announcementRef = db.ref('announcements');
 

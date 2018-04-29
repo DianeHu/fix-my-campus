@@ -6,7 +6,7 @@
       <v-layout row wrap>
         <v-flex xs12 sm12 md4 v-for="msg in getRequestUpdates()">
           <v-card>
-            <v-toolbar color="grey lighten-2" dense>
+            <v-toolbar :color="getColor(msg)" dense>
               <v-toolbar-title>
                 {{msg.op}} ({{msg.date}})
               </v-toolbar-title>
@@ -25,7 +25,7 @@
         </v-flex>
         <v-flex xs12 sm12 md4 v-for="msg in getFollowUpdates()">
           <v-card>
-            <v-toolbar color="grey lighten-2" dense>
+            <v-toolbar :color="getColor(msg)" dense>
               <v-toolbar-title>
                 {{msg.commenter}} ({{msg.date}})
               </v-toolbar-title>
@@ -51,7 +51,7 @@
 
         <v-flex xs12 sm12 md4 v-for="msg in getDecisions()">
           <v-card>
-            <v-toolbar color="grey lighten-2" dense>
+            <v-toolbar :color="getColor(msg)" dense>
               <v-toolbar-title>
                 {{msg.admin}} ({{msg.date}})
               </v-toolbar-title>
@@ -145,6 +145,18 @@
     ],
 
     methods:{
+      getColor(msg){
+        if(msg.type.toLowerCase() == 'decision'){
+          return "red lighten-3";
+        } else if (msg.type.toLowerCase() == 'following'){
+          return "teal lighten-3";
+        } else if (msg.type.toLowerCase() == 'category'){
+          return "green lighten-3";
+        } else if (msg.type.toLowerCase() == 'admin'){
+          return "orange lighten-3";
+        }
+      },
+
       removeMsg(msg){
         inboxRef.child(msg['.key']).remove();
       },

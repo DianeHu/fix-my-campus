@@ -6,9 +6,14 @@
       <v-layout column>
         <v-flex v-for="card in contactList">
           <v-card dark>
-            <v-card-title>
+            <v-toolbar>
+              <v-toolbar-title>
+                {{card.Department}}
+              </v-toolbar-title>
+            </v-toolbar>
+            <!--<v-card-title>
               {{card.Department}}
-            </v-card-title>
+            </v-card-title>-->
             <v-card-text>
               Email : {{card.Email}}
             </v-card-text>

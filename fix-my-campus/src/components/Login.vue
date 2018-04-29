@@ -1,5 +1,10 @@
 <template>
   <v-toolbar dark>
+    <v-toolbar-items>
+      <v-btn to="/">
+        <v-icon>home</v-icon>
+      </v-btn>
+    </v-toolbar-items>
     <v-toolbar-title v-if="user">{{user.name}}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
@@ -7,7 +12,7 @@
         <v-btn to="/issues">Issues</v-btn>
         <v-btn to="/updates">Updates</v-btn>
         <v-btn v-if=this.isRealAccount() to="/services">Services</v-btn>
-        <v-btn v-if=this.isRealAccount() to="/inbox" >Inbox</v-btn>
+        <v-btn v-if=this.isRealAccount() to="/inbox">Inbox</v-btn>
         <v-btn to="/contact">Contacts</v-btn>
         <v-tooltip bottom v-if=!this.isRealAccount()>
           <v-icon slot="activator" color="blue">info</v-icon>

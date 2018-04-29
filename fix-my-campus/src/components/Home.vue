@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-jumbotron dark>
-      <v-container fill-height>
+    <v-jumbotron src="https://vuetifyjs.com/static/doc-images/parallax/material2.jpg" :gradient="gradient" dark class="white--text">
+      <v-container fill-height class="white--text">
         <v-layout align-center>
           <v-flex class="heading" text-xs-center>
-            <h3 class="display-3">Welcome to Fix My Campus</h3>
-            <span class="subheading">A website dedicated to improving the quality of Duke University's campus through student filed issues and feedback.</span>
+            <h3 class="display-3 white--text">Welcome to Fix My Campus</h3>
+            <span class="subheading white--text">A website dedicated to improving the quality of Duke University's campus through student filed issues and feedback.</span>
           </v-flex>
         </v-layout>
       </v-container>
@@ -16,7 +16,7 @@
       <span class="subheading">
         This website was inspired by Duke's <a href="https://www.facebook.com/groups/fixmycampus/">Fix My Campus</a> Facebook group.
         In light of the fact that many people do not have Facebook accounts, and that many more may be leaving the site,
-        decided that it may be wise to have a website entirely dedicated to posting issues about Duke's campus, and having
+        we decided that it may be wise to have a website entirely dedicated to posting issues about Duke's campus, and having
         people contact the necessary Duke authorities to report these issues.
       </span>
     </v-flex>
@@ -73,7 +73,9 @@
 <script>
   export default {
     data () {
-
+      return{
+        gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)'
+      }
     }
   }
 </script>
