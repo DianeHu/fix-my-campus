@@ -5,6 +5,7 @@ import IssueView from '@/components/IssueView';
 import Contact from '@/components/Contact';
 import Services from '@/components/Services';
 import Inbox from '@/components/Inbox';
+import Announcements from '@/components/Announcements'
 import {storageRef } from '../database'
 
 Vue.use(Router)
@@ -35,6 +36,11 @@ export default new Router({
       path: '/inbox',
       name: 'Inbox',
       component: Inbox
+    },
+    {
+      path: '/updates',
+      name: 'Announcements',
+      component: Announcements
     }
   ]
 })
