@@ -67,10 +67,6 @@
         and in some cases it might be preferable to go straight to the source if the issue is urgent.
       </span>
     </v-flex>
-    <v-btn to="/issues">Issues</v-btn>
-    <v-btn to="/contact">Contacts</v-btn>
-    <v-btn to="/services">Services</v-btn>
-    <v-btn to="/inbox">Inbox</v-btn>
   </div>
 </template>
 

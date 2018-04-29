@@ -4,6 +4,20 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-container v-if="user">
+        <v-btn to="/issues">Issues</v-btn>
+        <v-btn to="/updates">Updates</v-btn>
+        <v-btn v-if=this.isRealAccount() to="/services">Services</v-btn>
+        <v-btn v-if=this.isRealAccount() to="/inbox" >Inbox</v-btn>
+        <v-btn to="/contact">Contacts</v-btn>
+        <v-tooltip bottom v-if=!this.isRealAccount()>
+          <v-icon slot="activator" color="blue">info</v-icon>
+          <span>It seems that your account is not yet authenticated!
+            <br>
+            Authenticated users can create, comment on, like, and follow issues.
+            <br>
+            Additionally, authenticated users can submit service requests.
+          </span>
+        </v-tooltip>
         <v-dialog v-if=!this.isRealAccount() v-model="dialog" max-width="30%">
           <v-btn slot="activator">Authenticate Account</v-btn>
           <user-auth :dialog=dialog :user=user></user-auth>
