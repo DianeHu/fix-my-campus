@@ -14,13 +14,11 @@
           </a>
         </v-btn>
       </v-container>
-      <div v-else>
-        <v-btn flat @click="signInPopup">
-          <a>
-            <span class="glyphicon glyphicon-user">Sign In</span>
-          </a>
-        </v-btn>
-      </div>
+      <v-btn v-else flat @click="signInPopup">
+        <a>
+          <span class="glyphicon glyphicon-user">Sign In</span>
+        </a>
+      </v-btn>
       <div id="firebaseui-auth-container" :class="{ popup: isShown }"></div>
     </v-toolbar-items>
   </v-toolbar>
@@ -68,36 +66,6 @@
         return (this.UserReference.filter(u => u.name === this.user.name).length > 0)
       },
 
-      checkDukeStudent (newEmail) {
-        newEmail = newEmail.trim()
-        if (newEmail) {
-          var netID = ''
-          for (var i = 0; i < newEmail.length; i++) {
-            if (newEmail[i] === '@') {
-              break
-            }
-            netID += newEmail[i]
-          }
-          var student;
-
-          var url = 'https://streamer.oit.duke.edu/ldap/people/netid/' + netID + '?access_token=512c70bd8a6cf54fae040bb6f6bb8ccc'
-
-          const proxyURL = "https://cors-anywhere.herokuapp.com/";
-          fetch(proxyURL + url)
-            .then(response => response.json())
-            .then(contents => {
-              console.log(contents);
-              if(contents === undefined || contents.length == 0){
-                student = false;
-              } else{
-                student = true;
-              }
-            })
-            .catch(() => console.log("Access to " + url + " is still blocked."))
-          return student;
-        }
-      },
-
       signInPopup () {
         authUI.start('#firebaseui-auth-container', {
           // open the authentication flow as a popup
@@ -112,18 +80,11 @@
           // respond to authentication attempts
           callbacks: {
             signInSuccessWithAuthResult: authResult => {
-              /*var check = this.checkDukeStudent(authResult.user.email);
-              console.log(check);*/
-              // save interesting parts of user data
-              /*if(check === true && check !== undefined && check !== null){*/
               this.signIn(authResult.user)
               // hide styling again
               this.isShown = false
               // do not redirect
               return false
-              /*} else{
-                alert("Please sign in with a Duke email, in the form netID@duke.edu");
-              }*/
             },
             uiShown: () => {
               // style UI container as a popup
