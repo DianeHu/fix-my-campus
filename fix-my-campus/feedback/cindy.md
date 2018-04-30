@@ -1,5 +1,7 @@
 # Cindy Pan feedback
 
+## April 27th, Perkins
+
 * The showing:category isn't very obvious, I didn't see it
 until you pointed it out.
 
