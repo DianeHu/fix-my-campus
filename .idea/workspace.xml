@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdad01ec-b164-4c9e-92dd-2df0fe6ebf21" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="bdad01ec-b164-4c9e-92dd-2df0fe6ebf21" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -63,7 +60,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cindy.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="firebaseExport.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="651">
+              <caret line="198" column="3" lean-forward="false" selection-start-line="198" selection-start-column="3" selection-end-line="198" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jeremy.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fix-my-campus/feedback/jeremy.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="450">
+                <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cindy.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fix-my-campus/feedback/cindy.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -76,31 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="firebaseExport.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="651">
-              <caret line="198" column="3" lean-forward="false" selection-start-line="198" selection-start-column="3" selection-end-line="198" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Issue.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Issue.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="25">
               <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewIssue.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="151" column="30" lean-forward="false" selection-start-line="151" selection-start-column="30" selection-end-line="151" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -201,6 +201,7 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/fix-my-campus/feedback/cindy.md" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json" />
+        <option value="$PROJECT_DIR$/fix-my-campus/feedback/jeremy.md" />
       </list>
     </option>
   </component>
@@ -221,7 +222,6 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="972" />
-    <option name="y" value="24" />
     <option name="width" value="1048" />
     <option name="height" value="1096" />
   </component>
@@ -256,20 +256,7 @@
               <item name="final-project-team-10" type="b2602c69:ProjectViewProjectNode" />
               <item name="final-project-team-10" type="462c0819:PsiDirectoryNode" />
               <item name="fix-my-campus" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="final-project-team-10" type="b2602c69:ProjectViewProjectNode" />
-              <item name="final-project-team-10" type="462c0819:PsiDirectoryNode" />
-              <item name="fix-my-campus" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="final-project-team-10" type="b2602c69:ProjectViewProjectNode" />
-              <item name="final-project-team-10" type="462c0819:PsiDirectoryNode" />
-              <item name="fix-my-campus" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="feedback" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -315,12 +302,12 @@
       <workItem from="1524019816289" duration="7833000" />
       <workItem from="1524071906036" duration="4992000" />
       <workItem from="1524338361049" duration="122486000" />
-      <workItem from="1525046283188" duration="10901000" />
+      <workItem from="1525046283188" duration="11196000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146212000" />
+    <option name="totallyTimeSpent" value="146507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2070" height="1118" extended-state="6" />
@@ -356,17 +343,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Inbox.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3625">
-          <caret line="149" column="31" lean-forward="false" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#v-container#0;n#v-card#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#4169#4213#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/IssueView.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -758,11 +734,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="198" column="3" lean-forward="false" selection-start-line="198" selection-start-column="3" selection-end-line="198" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="318">
             <caret line="92" column="26" lean-forward="true" selection-start-line="92" selection-start-column="26" selection-end-line="92" selection-end-column="26" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fix-my-campus/feedback/jeremy.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="450">
+            <caret line="18" column="2" lean-forward="false" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
             <folding />
           </first_editor>
           <second_editor />
@@ -777,14 +772,6 @@
             <folding />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/firebaseExport.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="198" column="3" lean-forward="false" selection-start-line="198" selection-start-column="3" selection-end-line="198" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
