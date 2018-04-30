@@ -139,5 +139,7 @@
 </script>
 
 <style scoped>
-
+  #firebaseui-auth-container{
+    z-index: 99
+  }
 </style>

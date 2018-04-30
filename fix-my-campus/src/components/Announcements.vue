@@ -50,7 +50,7 @@
                  style="min-height: 0;"
                  grid-list-lg>
       <v-layout row wrap>
-        <v-flex xs12 sm12 md4 v-for="announce in announcementReference">
+        <v-flex xs12 v-for="announce in announcementReference">
           <v-card color="cyan darken-2" class="white--text">
             <v-toolbar dark dense>
               <v-toolbar-title>

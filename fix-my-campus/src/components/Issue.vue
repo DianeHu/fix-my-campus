@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm12 md4>
+  <v-flex xs12>
     <v-card color="cyan darken-2" class="white--text">
       <v-toolbar dark dense>
         <v-toolbar-title>

@@ -218,7 +218,7 @@
         today = m + '/' + d + '/' + y;
 
         if(decision == "approve"){
-          var user = this.userReference.filter(u => u.name == this.person.name);
+          var user = this.userReference.filter(u => u.name == msg.op);
           userRef.child(user[0]['.key']).update({isAdmin: true});
           inboxRef.push({
             title: 'Approved request: admin permissions for ' + msg.op,
