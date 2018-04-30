@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdad01ec-b164-4c9e-92dd-2df0fe6ebf21" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/index.html" afterPath="$PROJECT_DIR$/fix-my-campus/dist/index.html" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/static/css/app.6366cdcd8890fe5971e2231bccaff5d7.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/static/css/app.6366cdcd8890fe5971e2231bccaff5d7.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/static/js/app.d4e13b87021756faf151.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/static/js/app.d4e13b87021756faf151.js.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/dist/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" afterPath="$PROJECT_DIR$/fix-my-campus/dist/static/js/manifest.2ae2e69a05c33dfc65f8.js.map" />
-      <change beforePath="$PROJECT_DIR$/fix-my-campus/src/components/Services.vue" afterPath="$PROJECT_DIR$/fix-my-campus/src/components/Services.vue" />
+      <change beforePath="$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue" afterPath="$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fix-my-campus/dist/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="434" lean-forward="false" selection-start-line="0" selection-start-column="434" selection-end-line="0" selection-end-column="434" />
+            <state relative-caret-position="25">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -56,12 +49,22 @@
       <file leaf-file-name="Issue.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Issue.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="173" column="6" lean-forward="false" selection-start-line="173" selection-start-column="6" selection-end-line="173" selection-end-column="6" />
+            <state relative-caret-position="-4350">
+              <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#v-card-actions#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#5313#5352#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewIssue.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,16 +114,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
               <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fix-my-campus/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -184,7 +177,6 @@
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/CategoryRequest.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/RequestAdmin.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/Tagger.vue" />
-        <option value="$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/UserAuthenticator.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/IssueView.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/database.js" />
@@ -198,6 +190,7 @@
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/Login.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/src/components/Services.vue" />
         <option value="$PROJECT_DIR$/fix-my-campus/dist/index.html" />
+        <option value="$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue" />
       </list>
     </option>
   </component>
@@ -312,12 +305,12 @@
       <workItem from="1524019816289" duration="7833000" />
       <workItem from="1524071906036" duration="4992000" />
       <workItem from="1524338361049" duration="122486000" />
-      <workItem from="1525046283188" duration="3181000" />
+      <workItem from="1525046283188" duration="4022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138492000" />
+    <option name="totallyTimeSpent" value="139333000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2070" height="1118" extended-state="6" />
@@ -624,17 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="56" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="56" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#v-card-actions#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2528#2569#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Inbox.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -703,25 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="57" lean-forward="false" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Issue.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="173" column="6" lean-forward="false" selection-start-line="173" selection-start-column="6" selection-end-line="173" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#v-card-actions#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#5313#5352#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Home.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -756,8 +719,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fix-my-campus/dist/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="434" lean-forward="false" selection-start-line="0" selection-start-column="434" selection-end-line="0" selection-end-column="434" />
+        <state relative-caret-position="25">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="57" lean-forward="false" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/Issue.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4350">
+          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#v-card-actions#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#5313#5352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fix-my-campus/src/components/NewIssue.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
           <folding />
         </state>
       </provider>

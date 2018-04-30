@@ -145,7 +145,8 @@
             date: this.date,
             mostRecentUpdate: Date.now() * -1,
             showComments: false,
-            justSubmitted: true
+            justSubmitted: true,
+            modal: false
           });
           var submittedIssue = this.issueReference.filter(i => i.justSubmitted == true);
           this.convertTemps(submittedIssue[0]['.key']);
