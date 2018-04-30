@@ -105,6 +105,8 @@ Vuetify Jumbotron picture for homepage (href, not downloaded file)
 ## Bugs
 
 Firebase auth container sometimes partially hidden so users can't actually log in from home page
+Also, auth container doesn't allow pressing buttons it seems--like clicking on the Next buttons messes login up.
+You just have to keep pressing enter and not touch any buttons.
 
 ## Extra credit
 
