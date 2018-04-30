@@ -338,6 +338,8 @@
         issueLikes.forEach(iss => likeRef.child(iss['.key']).remove());
         toRemove.forEach(comm => this.removeComment(comm));
         issueRef.child(this.issue['.key']).remove();
+        var tagsToRemove = this.tagReference.filter(t => t.owner == this.issue['.key']);
+        tagsToRemove.forEach(t => tagRef.child(t['.key']).remove());
       },
 
       editTitle(){
