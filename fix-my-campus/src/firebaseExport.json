@@ -1,0 +1,200 @@
+[
+  {
+    "announcements" : {
+      "-LBJOmlN0F58tiFn_BaI" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "description" : "FMC is working on making food points carry over year to year. Stay tuned for exciting updates!",
+        "title" : "Food point carryover"
+      }
+    },
+    "categories" : {
+      "-LBJOQ3y7bIMydH7I3Ou" : {
+        "desc" : "Issues related to Duke housing",
+        "title" : "HRL"
+      },
+      "-LBJOQx1F_iIcl6sfwIL" : {
+        "desc" : "Issues related to Duke dining",
+        "title" : "Duke Dining"
+      },
+      "-LBJORdINBn2rHzGGnwp" : {
+        "desc" : "Facilities related issues such as building damage/needed reparations",
+        "title" : "Facilities"
+      },
+      "-LBJOSAy9alxRg7trDGT" : {
+        "desc" : "Duke parking related issues",
+        "title" : "Parking"
+      },
+      "-LBJOSgY_JpFFPyPBdTU" : {
+        "desc" : "Central Campus issues",
+        "title" : "Central"
+      },
+      "-LBJOTBUIdeMI4l_nCRG" : {
+        "desc" : "West campus related issues",
+        "title" : "West"
+      },
+      "-LBJOThO_xMXfbirl2cW" : {
+        "desc" : "East campus issues",
+        "title" : "East"
+      },
+      "-LBJOUImMTuvbaPtD48M" : {
+        "desc" : "Issues related to Duke libraries",
+        "title" : "Libraries"
+      },
+      "-LBJOUtSmV5I4tiY1Qp2" : {
+        "desc" : "OIT related issues",
+        "title" : "OIT"
+      }
+    },
+    "comments" : {
+      "-LBJT0I7dqlLbXgB3woI" : {
+        "date" : "04/29/2018",
+        "id" : "-LBJQ75uC7rD5mKDQ7M3",
+        "owner" : "Cindy Pan",
+        "title" : "People dumping trash where they shouldn't."
+      }
+    },
+    "inbox" : {
+      "-LBJOQ3zC04D7pP6hhOZ" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category HRL",
+        "type" : "decision"
+      },
+      "-LBJOQx3NFrq0oP2ailn" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category Duke Dining",
+        "type" : "decision"
+      },
+      "-LBJORdJNoYP-8ljJfpJ" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category Facilities",
+        "type" : "decision"
+      },
+      "-LBJOSB0FfuDBtmFN646" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category Parking",
+        "type" : "decision"
+      },
+      "-LBJOSg_tsxZqHw5qRK5" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category Central",
+        "type" : "decision"
+      },
+      "-LBJOTBW0bmWWMWq_aU7" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category West",
+        "type" : "decision"
+      },
+      "-LBJOThRSrkKxKh4XBOV" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category East",
+        "type" : "decision"
+      },
+      "-LBJOUIoFsCgPvRE-95B" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category Libraries",
+        "type" : "decision"
+      },
+      "-LBJOUtUAarBuCdUtdM1" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Diane Hu",
+        "title" : "Approved request: add tag category OIT",
+        "type" : "decision"
+      },
+      "-LBJPT5f_AKGE9u2bBEH" : {
+        "admin" : "Diane Hu",
+        "date" : "04/29/2018",
+        "op" : "Jarod Cahoon",
+        "title" : "Approved request: admin permissions for Jarod Cahoon",
+        "type" : "decision"
+      }
+    },
+    "issues" : {
+      "-LBJOziq7P6368ZNVYjL" : {
+        "date" : "04/29/2018",
+        "description" : "Sinks are clogged in basement girls bathrooms. Please fix!",
+        "editingDescription" : false,
+        "editingTitle" : false,
+        "image" : "https://firebasestorage.googleapis.com/v0/b/fixmycampus-78290.appspot.com/o/images%2Ffg7.jpg?alt=media&token=3cbf6532-7666-4253-af54-89755e28773f",
+        "justSubmitted" : false,
+        "modal" : false,
+        "mostRecentUpdate" : -1525055710240,
+        "owner" : "Diane Hu",
+        "showComments" : false,
+        "title" : "Clogged sinks in Lilly"
+      },
+      "-LBJQ75uC7rD5mKDQ7M3" : {
+        "date" : "04/29/2018",
+        "description" : "Always smells like trash in the fourth floor hallway.",
+        "editingDescription" : false,
+        "editingTitle" : false,
+        "image" : "https://firebasestorage.googleapis.com/v0/b/fixmycampus-78290.appspot.com/o/images%2Fbg8.jpg?alt=media&token=5a9f3520-e589-450d-a27c-dcc293108b84",
+        "justSubmitted" : false,
+        "modal" : false,
+        "mostRecentUpdate" : -1525056765248,
+        "owner" : "Cindy Pan",
+        "showComments" : false,
+        "title" : "Swift smells weird"
+      }
+    },
+    "likes" : {
+      "-LBJ_3xKIOxW_-0RkXDM" : {
+        "id" : "-LBJOziq7P6368ZNVYjL",
+        "liker" : "Cindy Pan"
+      }
+    },
+    "tags" : {
+      "-LBJOy4ubaj9J6WspIG4" : {
+        "id" : "-LBJOTBUIdeMI4l_nCRG",
+        "owner" : "-LBJOziq7P6368ZNVYjL"
+      },
+      "-LBJOyOrdljhLRjv02I8" : {
+        "id" : "-LBJOUImMTuvbaPtD48M",
+        "owner" : "-LBJOziq7P6368ZNVYjL"
+      },
+      "-LBJOzJ-u_kI2XOdTS7I" : {
+        "id" : "-LBJORdINBn2rHzGGnwp",
+        "owner" : "-LBJOziq7P6368ZNVYjL"
+      },
+      "-LBJQ4DkQQZ2NiGaAiSw" : {
+        "id" : "-LBJOSgY_JpFFPyPBdTU",
+        "owner" : "-LBJQ75uC7rD5mKDQ7M3"
+      },
+      "-LBJQ50i129O0O7Q4cq3" : {
+        "id" : "-LBJORdINBn2rHzGGnwp",
+        "owner" : "-LBJQ75uC7rD5mKDQ7M3"
+      }
+    },
+    "users" : {
+      "-LBJKHSvX5JlqHTXs2iU" : {
+        "isAdmin" : true,
+        "name" : "Diane Hu"
+      },
+      "-LBJKXC7XWDsjudBfXJK" : {
+        "isAdmin" : true,
+        "name" : "Jarod Cahoon"
+      },
+      "-LBJPuLH2rlj2Hvzot9d" : {
+        "isAdmin" : false,
+        "name" : "Cindy Pan"
+      }
+    }
+  }
+]
