@@ -44,10 +44,20 @@
           </v-flex>
           <v-flex xs5 v-if="issue.image">
             <v-card-media
+              v-on:click.native="clickyBoy(issue)"
               :src="issue.image"
               height="125px"
               contain
             ></v-card-media>
+            <v-dialog v-model="issue.modal">
+              <v-card>
+                <v-card-media
+                  :src="issue.image"
+                  height="50%"
+                  contain
+                ></v-card-media>
+              </v-card>
+            </v-dialog>
           </v-flex>
         </v-layout>
         <v-divider light></v-divider>
@@ -174,6 +184,10 @@
     },
 
     methods:{
+      clickyBoy(issue){
+        issue.modal = true;
+      },
+
       isAdmin(name){
         var filtered = this.userReference.filter(u => u.name == name);
         if(filtered[0].isAdmin == true){
