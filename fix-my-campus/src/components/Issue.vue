@@ -51,11 +51,13 @@
             ></v-card-media>
             <v-dialog v-model="issue.modal">
               <v-card>
-                <v-card-media
-                  :src="issue.image"
-                  height="50%"
-                  contain
-                ></v-card-media>
+                <v-card-text>
+                  <v-card-media
+                    :src="issue.image"
+                    height="300px"
+                    contain
+                  ></v-card-media>
+                </v-card-text>
               </v-card>
             </v-dialog>
           </v-flex>
